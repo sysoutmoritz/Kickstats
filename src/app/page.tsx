@@ -1,24 +1,18 @@
-"use server";
-import { redirect } from "next/navigation";
-import Testy from "../components/Testy/Testy";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-async function handleClick() {
-  console.log("bla");
-}
-
-export default async function Home() {
+export default function Home() {
+  const router = useRouter();
+  const tokenExp = localStorage.getItem("tokenExp");
+  useEffect(() => {
+    if (!tokenExp || Date.now() > Date.parse(tokenExp)) {
+      router.push("/login");
+    } else {
+      router.push("/dashboard");
+    }
+  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p>Login</p>
-      <button
-        onClick={() => {
-          handleClick();
-        }}
-        className="border-2 border-red-300"
-      >
-        To Login
-      </button>
-      <p>hi</p>
-    </main>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
   );
 }

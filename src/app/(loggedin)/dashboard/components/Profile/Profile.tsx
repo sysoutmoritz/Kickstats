@@ -1,6 +1,6 @@
 "use client";
 
-const Dashboard = () => {
+export default function Profile() {
   const userName = localStorage.getItem("userName");
   const userProfile = localStorage.getItem("userProfile");
   return (
@@ -15,8 +15,14 @@ const Dashboard = () => {
         }
         alt="profile"
       />
+      <button
+        className="bg-white border-2 border-black text-black"
+        onClick={() => {
+          localStorage.clear();
+        }}
+      >
+        Delte localStorage for research purposes
+      </button>
     </div>
   );
-};
-
-export default Dashboard;
+}

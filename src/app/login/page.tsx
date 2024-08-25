@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 async function doLoginCall(email: string, password: string, router: any) {
   const response = await fetch("https://api.kickbase.com/user/login", {
@@ -39,13 +39,15 @@ const Login = () => {
   });
   return (
     <div>
-      <p>hi</p>
+      <p>Hi please login</p>
       <form
+        className="text-black"
         onSubmit={handleSubmit((data) => {
           doLoginCall(data.email, data.password, router);
         })}
       >
         <input
+          className="border-2 border-black"
           type="text"
           placeholder="E-Mail"
           {...register("email", {
@@ -54,6 +56,7 @@ const Login = () => {
         />
         <p>{errors.email?.message}</p>
         <input
+          className="border-2 border-black"
           type="password"
           placeholder="Password"
           {...register("password", {
@@ -61,7 +64,12 @@ const Login = () => {
           })}
         />
         <p>{errors.password?.message}</p>
-        <button type="submit">Login</button>
+        <button
+          className="rounded-md border-2 border-red-400 text-white"
+          type="submit"
+        >
+          Login
+        </button>
       </form>
     </div>
   );
