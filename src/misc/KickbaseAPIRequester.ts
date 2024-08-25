@@ -1,0 +1,40 @@
+import isTokenValid from "../components/TokenChecker/TokenChecker"
+
+async function postRequest(url: string, body: object) {
+    const cookie = localStorage.getItem("token");
+    if(cookie && isTokenValid()) {
+        const response = await fetch(url, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Cookie": cookie,
+        },
+        body: JSON.stringify(body),
+        });
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            window.alert("Request failed, please return to frontpage");
+        }
+}
+}
+
+async function getRequest(url: string) {
+    const cookie = localStorage.getItem("token");
+    if(cookie && isTokenValid()) {
+        const response = await fetch(url, {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Cookie": cookie,
+        },
+        });
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            window.alert("Request failed, please return to frontpage");
+        }
+}
+}

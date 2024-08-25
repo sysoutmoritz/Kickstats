@@ -1,8 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import { useState } from "react";
 
-async function doLoginCall(email: string, password: string, router: any) {
+async function doLoginCall(
+  email: string,
+  password: string,
+  router: any,
+  setLoginError: Function
+) {
   const response = await fetch("https://api.kickbase.com/user/login", {
     method: "POST",
     headers: {
@@ -15,17 +21,24 @@ async function doLoginCall(email: string, password: string, router: any) {
       ext: false,
     }),
   });
-  const json = await response.json();
-  console.log(json);
-  localStorage.setItem("token", json.token);
-  localStorage.setItem("tokenExp", json.tokenExp);
-  localStorage.setItem("userId", json.user.id);
-  localStorage.setItem("userName", json.user.name);
-  localStorage.setItem("userProfile", json.user.profile);
-  router.push("/dashboard");
+  if (response.status === 200) {
+    const json = await response.json();
+    console.log(json);
+    localStorage.setItem("token", json.token);
+    localStorage.setItem("tokenExp", json.tokenExp);
+    localStorage.setItem("userId", json.user.id);
+    localStorage.setItem("userName", json.user.name);
+    localStorage.setItem("userProfile", json.user.profile);
+    localStorage.setItem("leagues", json.leagues);
+    router.push("/dashboard");
+  } else {
+    console.log("Login failed");
+    setLoginError(true);
+  }
 }
 
 const Login = () => {
+  const [loginError, setLoginError] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -43,7 +56,7 @@ const Login = () => {
       <form
         className="text-black"
         onSubmit={handleSubmit((data) => {
-          doLoginCall(data.email, data.password, router);
+          doLoginCall(data.email, data.password, router, setLoginError);
         })}
       >
         <input
@@ -71,6 +84,9 @@ const Login = () => {
           Login
         </button>
       </form>
+      {loginError && (
+        <p className="text-red-400">Login failed. Please try again.</p>
+      )}
     </div>
   );
 };
