@@ -19,6 +19,15 @@
 # misc
 .DS_Store
 *.pem
+/target
+/dist
+/logs
+/public
+.cache
+.vscode
+.idea
+.next
+.env
 
 # debug
 npm-debug.log*
