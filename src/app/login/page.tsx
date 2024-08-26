@@ -51,16 +51,17 @@ const Login = () => {
     },
   });
   return (
-    <div>
-      <p>Hi please login</p>
+    <div className="flex flex-col items-center mt-24 gap-4">
+      <h1 className="text-3xl">Welcome to Kickstats</h1>
+      <p>Please log in with your Kickbase Credentials</p>
       <form
-        className="text-black"
+        className="flex flex-col items-center gap-1"
         onSubmit={handleSubmit((data) => {
           doLoginCall(data.email, data.password, router, setLoginError);
         })}
       >
         <input
-          className="border-2 border-black"
+          className="border border-bg-slate-800 rounded-md"
           type="text"
           placeholder="E-Mail"
           {...register("email", {
@@ -69,7 +70,7 @@ const Login = () => {
         />
         <p>{errors.email?.message}</p>
         <input
-          className="border-2 border-black"
+          className="border border-bg-slate-800 rounded-md"
           type="password"
           placeholder="Password"
           {...register("password", {
@@ -77,7 +78,10 @@ const Login = () => {
           })}
         />
         <p>{errors.password?.message}</p>
-        <button className="rounded-md border-2 border-red-400" type="submit">
+        <button
+          className="rounded-md bg-slate-50 border border-black text-black dark:bg-slate-900 dark:text-white dark:border-slate-50 p-2"
+          type="submit"
+        >
           Login
         </button>
       </form>
