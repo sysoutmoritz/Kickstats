@@ -24,7 +24,9 @@ export default function HeaderAccount() {
           height={48}
         />
         <Image
-          className={isOpen ? "rotate-180" : ""}
+          className={
+            isOpen ? "header-arrow-animation-up" : "header-arrow-animation-down"
+          }
           src="/dropdown.png"
           alt=""
           width={48}
@@ -32,10 +34,10 @@ export default function HeaderAccount() {
         />
       </button>
       {isOpen && (
-        <div className="absolute top-18 right-17 w-6 h-6 rotate-45 bg-white transition-opacity"></div>
+        <div className="absolute top-23 right-17 w-6 h-6 rotate-45 bg-white transition-opacity"></div>
       )}
       {isOpen && (
-        <div className="absolute top-19 right-4 w-32 h-8 rounded-sm bg-white text-black transition-opacity">
+        <div className="absolute top-24 right-4 w-32 h-7 rounded-sm bg-white text-black transition-opacity">
           <button
             className="w-full h-full"
             onClick={() => {

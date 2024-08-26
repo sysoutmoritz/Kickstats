@@ -30,4 +30,12 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .header-arrow-animation-down {
+    transform: rotate(0deg);
+    transition: transform 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .header-arrow-animation-up {
+    transform: rotate(180deg);
+    transition: transform 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
 }

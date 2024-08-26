@@ -4,7 +4,7 @@ import HeaderAccount from "../HeaderAccount/HeaderAccount";
 export default function Header() {
   return (
     <>
-      <header className="flex items-center justify-center w-100% h-20 bg-gray-600 p-2">
+      <header className="flex items-center justify-center w-100% h-32 bg-gray-600 p-2">
         <div className="mr-auto border-2 invisible border-yellow-800">
           <HeaderAccount />
         </div>
