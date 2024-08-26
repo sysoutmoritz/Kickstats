@@ -1,4 +1,5 @@
 import TokenChecker from "@/components/TokenChecker/TokenChecker";
+import Header from "./components/Header/Header";
 
 export default function LoginLayout({
   children,
@@ -6,9 +7,7 @@ export default function LoginLayout({
   return (
     <>
       <TokenChecker />
-      <div className="w-100% h-16 border-2 border-green-400">
-        my cool logged in header
-      </div>
+      <Header />
       <div>{children}</div>
     </>
   );
