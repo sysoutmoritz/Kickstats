@@ -1,5 +1,9 @@
 import Image from "next/image";
-import HeaderAccount from "../HeaderAccount/HeaderAccount";
+import dynamic from "next/dynamic";
+
+const HeaderAccount = dynamic(() => import("../HeaderAccount/HeaderAccount"), {
+  ssr: false,
+});
 
 export default function Header() {
   return (

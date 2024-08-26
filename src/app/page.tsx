@@ -1,11 +1,13 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const tokenExp = localStorage.getItem("tokenExp");
+  let tokenExp: string | null;
   useEffect(() => {
+    tokenExp = localStorage.getItem("tokenExp");
     if (!tokenExp || Date.now() > Date.parse(tokenExp)) {
       router.push("/login");
     } else {

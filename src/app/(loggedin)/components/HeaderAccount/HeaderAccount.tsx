@@ -1,20 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 
 export default function HeaderAccount() {
   const router = useRouter();
-  const picture = localStorage.getItem("userProfile")!;
   const [isOpen, setIsOpen] = useState(false);
+  const picture = localStorage.getItem("userProfile")!;
+
   return (
     <>
       <button
         onClick={() => {
           setIsOpen(!isOpen);
         }}
-        className="flex items-center justify-center"
+        className="flex items-center justify-center overflow-hidden"
       >
         <Image
           className="rounded-full"

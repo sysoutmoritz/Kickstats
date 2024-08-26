@@ -77,10 +77,7 @@ const Login = () => {
           })}
         />
         <p>{errors.password?.message}</p>
-        <button
-          className="rounded-md border-2 border-red-400 text-white"
-          type="submit"
-        >
+        <button className="rounded-md border-2 border-red-400" type="submit">
           Login
         </button>
       </form>
