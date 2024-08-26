@@ -1,5 +1,6 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import ThemeSwitch from "@/components/ThemeSwitch/ThemeSwitch";
 
 const HeaderAccount = dynamic(() => import("../HeaderAccount/HeaderAccount"), {
   ssr: false,
@@ -8,9 +9,9 @@ const HeaderAccount = dynamic(() => import("../HeaderAccount/HeaderAccount"), {
 export default function Header() {
   return (
     <>
-      <header className="flex items-center justify-center w-100% h-32 bg-gray-600 p-2">
-        <div className="mr-auto border-2 invisible border-yellow-800">
-          <HeaderAccount />
+      <header className="flex items-center justify-center w-100% h-32 bg-gray-600 dark:bg-gray-700 p-2">
+        <div className="mr-auto w-24">
+          <ThemeSwitch />
         </div>
         <div className="mr-auto ml-auto flex items-center justify-center gap-1">
           <Image
@@ -22,7 +23,7 @@ export default function Header() {
           />
           <h1 className="text-white text-2xl">Kickstats</h1>
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto w-24">
           <HeaderAccount />
         </div>
       </header>

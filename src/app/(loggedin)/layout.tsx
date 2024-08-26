@@ -10,7 +10,7 @@ export default function LoginLayout({
     <>
       <TokenChecker />
       <Header />
-      <div>{children}</div>
+      <main>{children}</main>
     </>
   );
 }
