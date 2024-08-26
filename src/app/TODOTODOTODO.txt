@@ -1,0 +1,6 @@
+Dark Mode adden:
+im Header links ein Icon dafür machen, was in localStorage true/false Setting ändert und dann irgendwie ein Update triggert?
+
+Login Screen schick machen
+
+DASHBOARDD BABY
