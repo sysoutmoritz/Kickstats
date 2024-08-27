@@ -32,7 +32,7 @@ async function doLoginCall(
   if (response.status === 200) {
     const json = await response.json();
     console.log(json);
-    setToken("kkstrauth=" + json.token);
+    setToken(json.token);
     setTokenExp(json.tokenExp);
     setUserId(json.user.id);
     setUserName(json.user.name);

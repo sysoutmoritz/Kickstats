@@ -2,15 +2,14 @@
 
 const baseURL = "https://api.kickbase.com"
 
-export async function postRequest(url: string, cookie:string, body: object) {
-    if(cookie) {
-        console.log("requesting at", baseURL + url, "with token", cookie);
+export async function postRequest(url: string, token:string, body: object) {
+    if(token) {
         const response = await fetch(baseURL + url, {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Cookie": cookie,
+        Authorization: "Bearer " + token,
         },
         body: JSON.stringify(body),
         });
@@ -22,15 +21,14 @@ export async function postRequest(url: string, cookie:string, body: object) {
 }
 }
 
-export async function getRequest(url: string, cookie:string) {
-    if(cookie) {
-        console.log("requesting at", baseURL + url, "with token", cookie);
+export async function getRequest(url: string, token:string) {
+    if(token) {
         const response = await fetch(baseURL + url, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Cookie": cookie,
+        Authorization: "Bearer " + token,
         },
         });
         if (response.status === 200) {
