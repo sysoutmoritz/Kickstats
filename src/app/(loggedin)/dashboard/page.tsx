@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [userName, setUserName] = useLocalStorage<string>("userName", "");
-  const [leagues, setLeagues] = useLocalStorage<string>("leagues", "");
+  const [leagues, setLeagues] = useLocalStorage<any[]>("leagues", []);
   const router = useRouter();
   return (
     <>
@@ -19,6 +19,19 @@ export default function Dashboard() {
         >
           General Bundesliga Stats
         </button>
+        {leagues.map((league) => {
+          return (
+            <button
+              key={league.id}
+              className="mt-8 inline-flex items-center justify-center rounded-xl bg-green-700 py-3 px-6 font-medium text-white transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+              onClick={() => {
+                router.push(`leagues/${league.id}`);
+              }}
+            >
+              {league.name}
+            </button>
+          );
+        })}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { set, useForm } from "react-hook-form";
 import { useState } from "react";
 import useLocalStorage from "use-local-storage";
+import { List } from "postcss/lib/list";
 
 async function doLoginCall(
   email: string,
@@ -31,7 +32,7 @@ async function doLoginCall(
   if (response.status === 200) {
     const json = await response.json();
     console.log(json);
-    setToken(json.token);
+    setToken("kkstrauth=" + json.token);
     setTokenExp(json.tokenExp);
     setUserId(json.user.id);
     setUserName(json.user.name);
@@ -53,7 +54,7 @@ const Login = () => {
     "userProfile",
     "/nopicture.webp"
   );
-  const [leagues, setLeagues] = useLocalStorage("leagues", "");
+  const [leagues, setLeagues] = useLocalStorage<any[]>("leagues", []);
   const [loginError, setLoginError] = useState(false);
   const router = useRouter();
   const {

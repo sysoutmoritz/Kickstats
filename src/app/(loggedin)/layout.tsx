@@ -3,7 +3,7 @@ import Header from "./components/Header";
 
 export const dynamic = "force-dynamic";
 
-export default function LoginLayout({
+export default function LoggedInLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-function isTokenValid() {
+export function isTokenValid() {
   const tokenExp = localStorage.getItem("tokenExp");
   if (!tokenExp || Date.now() > Date.parse(tokenExp)) {
     return false;

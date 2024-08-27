@@ -1,11 +1,10 @@
-import isTokenValid from "../components/TokenChecker"
-import useLocalStorage from "use-local-storage";
+
 
 const baseURL = "https://api.kickbase.com"
 
-async function postRequest(url: string, body: object) {
-    const [cookie, setCookie] = useLocalStorage("token", "");
-    if(cookie && isTokenValid()) {
+export async function postRequest(url: string, cookie:string, body: object) {
+    if(cookie) {
+        console.log("requesting at", baseURL + url, "with token", cookie);
         const response = await fetch(baseURL + url, {
         method: "POST",
         headers: {
@@ -23,9 +22,9 @@ async function postRequest(url: string, body: object) {
 }
 }
 
-async function getRequest(url: string) {
-    const [cookie, setCookie] = useLocalStorage("token", "");
-    if(cookie && isTokenValid()) {
+export async function getRequest(url: string, cookie:string) {
+    if(cookie) {
+        console.log("requesting at", baseURL + url, "with token", cookie);
         const response = await fetch(baseURL + url, {
         method: "GET",
         headers: {
