@@ -1,7 +1,8 @@
-import isTokenValid from "../components/TokenChecker/TokenChecker"
+import isTokenValid from "../components/TokenChecker"
+import useLocalStorage from "use-local-storage";
 
 async function postRequest(url: string, body: object) {
-    const cookie = localStorage.getItem("token");
+    const [cookie, setCookie] = useLocalStorage("token", "");
     if(cookie && isTokenValid()) {
         const response = await fetch(url, {
         method: "POST",
@@ -21,7 +22,7 @@ async function postRequest(url: string, body: object) {
 }
 
 async function getRequest(url: string) {
-    const cookie = localStorage.getItem("token");
+    const [cookie, setCookie] = useLocalStorage("token", "");
     if(cookie && isTokenValid()) {
         const response = await fetch(url, {
         method: "GET",

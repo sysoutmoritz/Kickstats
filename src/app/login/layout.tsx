@@ -1,4 +1,4 @@
-import LoginHeader from "./components/LoginHeader/LoginHeader";
+import LoginHeader from "./components/LoginHeader";
 
 export default function LoginLayout({
   children,
