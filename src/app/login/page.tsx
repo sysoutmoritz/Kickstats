@@ -116,6 +116,12 @@ const Login = () => {
       {loginError && (
         <p className="text-red-400">Login failed. Please try again.</p>
       )}
+      <p className="text-center max-w-96">
+        Don't worry, your data is stored locally in your browser and you will be
+        communicating with the Kickbase API directly. This means that the
+        password is sent nowhere else except for the official Kickbase API. All
+        the data fetching is being handled clientside.
+      </p>
     </div>
   );
 };

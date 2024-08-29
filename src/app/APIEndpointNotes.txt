@@ -1,0 +1,4 @@
+
+
+/leagues/{leagueID}/players/{playerID} für die Live Karten
+/leagues/{leagueID}/players/{playerID}/stats für die Top25 / klicken auf den Spieler in der Liveliste

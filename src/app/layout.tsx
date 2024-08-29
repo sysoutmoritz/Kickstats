@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <div className="bg-gray-50 dark:bg-slate-800 h-screen text-black dark:text-gray-50 box-border">
+          <div className="bg-gray-50 dark:bg-slate-800 h-100% text-black dark:text-gray-50 box-border">
             {children}
           </div>
         </Providers>

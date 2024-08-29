@@ -11,7 +11,6 @@ export default function League({ params }: { params: { leagueId: string } }) {
   const [leagueData, setLeagueData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    console.log("TYPEOFEIDEE IN LEAGUE", typeof params.leagueId);
     getRequest("/leagues", token).then((data) => {
       setLeagueData(
         data.leagues.find((obj: any) => obj.id === params.leagueId)

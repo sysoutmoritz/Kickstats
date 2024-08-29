@@ -42,7 +42,7 @@ export default function ManagerDropdownMenu({
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">Select Player</Button>
+        <Button variant="bordered">Select Manager</Button>
       </DropdownTrigger>
       <DropdownMenu>
         <DropdownSection>
@@ -52,8 +52,8 @@ export default function ManagerDropdownMenu({
               key={user.id}
               className={
                 user.id == livePlayerId
-                  ? "border border-gray-600 bg-gray-400 py-1"
-                  : "border border-gray-600 bg-gray-100 py-1"
+                  ? "border border-gray-600 bg-gray-400 dark:bg-slate-500 dark:text-gray-50 py-1 my-0.5"
+                  : "border border-gray-600 bg-gray-100 dark:bg-slate-800 dark:text-gray-50 py-1 my-0.5"
               }
               onClick={() => {
                 if (user.id != livePlayerId) {
