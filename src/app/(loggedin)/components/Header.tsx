@@ -1,11 +1,12 @@
-import ThemeSwitch from "@/components/ThemeSwitch/ThemeSwitch";
 import Image from "next/image";
+import ThemeSwitch from "@/components/ThemeSwitch";
+import HeaderAccount from "./HeaderAccount";
 
-export default function LoginHeader() {
+export default function Header() {
   return (
     <>
       <header className="flex items-center justify-center w-100% h-32 bg-gray-600 dark:bg-gray-700 p-2">
-        <div className="mr-auto">
+        <div className="mr-auto w-24">
           <ThemeSwitch />
         </div>
         <div className="mr-auto ml-auto flex items-center justify-center gap-1">
@@ -18,10 +19,11 @@ export default function LoginHeader() {
           />
           <h1 className="text-white text-2xl">Kickstats</h1>
         </div>
-        <div className="ml-auto invisible">
-          <ThemeSwitch />
+        <div className="ml-auto w-24">
+          <HeaderAccount />
         </div>
       </header>
+      {/*<hr className="h-0.5 bg-black border-0"></hr>*/}
     </>
   );
 }

@@ -1,40 +1,82 @@
-import isTokenValid from "../components/TokenChecker/TokenChecker"
+const baseURL = "https://api.kickbase.com"
 
-async function postRequest(url: string, body: object) {
-    const cookie = localStorage.getItem("token");
-    if(cookie && isTokenValid()) {
-        const response = await fetch(url, {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Cookie": cookie,
-        },
-        body: JSON.stringify(body),
-        });
-        if (response.status === 200) {
-            return await response.json();
-        } else {
-            window.alert("Request failed, please return to frontpage");
-        }
-}
-}
 
-async function getRequest(url: string) {
-    const cookie = localStorage.getItem("token");
-    if(cookie && isTokenValid()) {
-        const response = await fetch(url, {
+export async function getRequest(url: string, token:string) {
+    if(token) {
+        const response = await fetch(baseURL + url, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Cookie": cookie,
+        Authorization: "Bearer " + token,
         },
         });
         if (response.status === 200) {
-            return await response.json();
+            const data = await response.json();
+            return data;
         } else {
             window.alert("Request failed, please return to frontpage");
         }
 }
+}
+
+export async function postRequest(url: string, token:string, body: object) {
+    if(token) {
+        const response = await fetch(baseURL + url, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(body),
+        });
+        if (response.status === 200) {
+            const data = await response.json();
+            return data;
+        } else {
+            window.alert("Request failed, please return to frontpage");
+        }
+}
+}
+
+export async function getFetcherSWR([url, token]:Array<string>) {
+    if(token) {
+        const response = await fetch(baseURL + url, {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        },
+        });
+        if (response.status === 200) {
+            const data = await response.json();
+            return data;
+        } else {
+            window.alert("Request failed, please return to frontpage");
+        }
+}
+
+}
+
+export async function postFetcherSWR([url, token, body]:Array<any>) {
+    if(token) {
+        const response = await fetch(baseURL + url, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(body),
+        });
+        if (response.status === 200) {
+            const data = await response.json();
+            return data;
+        } else {
+            window.alert("Request failed, please return to frontpage");
+        }
+}
+
 }

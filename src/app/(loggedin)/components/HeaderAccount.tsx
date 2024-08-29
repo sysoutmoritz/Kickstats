@@ -1,32 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
-import LogoutPrompt from "../LogoutPrompt/LogoutPrompt";
+import LogoutPrompt from "./LogoutPrompt";
+import useLocalStorage from "use-local-storage";
 
 export default function HeaderAccount() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const picture = localStorage.getItem("userProfile")!;
+  const [picture, setPicture] = useLocalStorage<string>("userProfile", "");
   const { theme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  /*
-  const ref = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (!ref.current!.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-  */
 
   return (
     <>
@@ -59,24 +45,6 @@ export default function HeaderAccount() {
         setIsOpen={setIsOpen}
         buttonRef={buttonRef}
       />
-      {/* 
-      {isOpen && (
-        <div className="absolute top-23 right-17 w-6 h-6 rotate-45 bg-white transition-opacity"></div>
-      )}
-      {isOpen && (
-        <div className="absolute top-24 right-4 w-32 h-7 rounded-sm bg-white text-black transition-opacity">
-          <button
-            className="w-full h-full"
-            onClick={() => {
-              localStorage.clear();
-              router.push("/login");
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      )}
-        */}
     </>
   );
 }

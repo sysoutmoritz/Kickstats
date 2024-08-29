@@ -1,9 +1,9 @@
-import TokenChecker from "@/components/TokenChecker/TokenChecker";
-import Header from "./components/Header/Header";
+import TokenChecker from "@/components/TokenChecker";
+import Header from "./components/Header";
 
 export const dynamic = "force-dynamic";
 
-export default function LoginLayout({
+export default function LoggedInLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (

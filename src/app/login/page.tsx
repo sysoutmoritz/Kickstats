@@ -2,12 +2,20 @@
 import { useRouter } from "next/navigation";
 import { set, useForm } from "react-hook-form";
 import { useState } from "react";
+import useLocalStorage from "use-local-storage";
+import { List } from "postcss/lib/list";
 
 async function doLoginCall(
   email: string,
   password: string,
   router: any,
-  setLoginError: Function
+  setLoginError: Function,
+  setToken: Function,
+  setTokenExp: Function,
+  setUserId: Function,
+  setUserName: Function,
+  setUserProfile: Function,
+  setLeagues: Function
 ) {
   const response = await fetch("https://api.kickbase.com/user/login", {
     method: "POST",
@@ -24,12 +32,12 @@ async function doLoginCall(
   if (response.status === 200) {
     const json = await response.json();
     console.log(json);
-    localStorage.setItem("token", json.token);
-    localStorage.setItem("tokenExp", json.tokenExp);
-    localStorage.setItem("userId", json.user.id);
-    localStorage.setItem("userName", json.user.name);
-    localStorage.setItem("userProfile", json.user.profile);
-    localStorage.setItem("leagues", json.leagues);
+    setToken(json.token);
+    setTokenExp(json.tokenExp);
+    setUserId(json.user.id);
+    setUserName(json.user.name);
+    setUserProfile(json.user.profile);
+    setLeagues(json.leagues);
     router.push("/dashboard");
   } else {
     console.log("Login failed");
@@ -38,6 +46,15 @@ async function doLoginCall(
 }
 
 const Login = () => {
+  const [token, setToken] = useLocalStorage("token", "");
+  const [tokenExp, setTokenExp] = useLocalStorage("tokenExp", "");
+  const [userId, setUserId] = useLocalStorage("userId", "");
+  const [userName, setUserName] = useLocalStorage("userName", "User");
+  const [userProfile, setUserProfile] = useLocalStorage(
+    "userProfile",
+    "/nopicture.webp"
+  );
+  const [leagues, setLeagues] = useLocalStorage<any[]>("leagues", []);
   const [loginError, setLoginError] = useState(false);
   const router = useRouter();
   const {
@@ -57,7 +74,18 @@ const Login = () => {
       <form
         className="flex flex-col items-center gap-1"
         onSubmit={handleSubmit((data) => {
-          doLoginCall(data.email, data.password, router, setLoginError);
+          doLoginCall(
+            data.email,
+            data.password,
+            router,
+            setLoginError,
+            setToken,
+            setTokenExp,
+            setUserId,
+            setUserName,
+            setUserProfile,
+            setLeagues
+          );
         })}
       >
         <input
@@ -88,6 +116,12 @@ const Login = () => {
       {loginError && (
         <p className="text-red-400">Login failed. Please try again.</p>
       )}
+      <p className="text-center max-w-96">
+        Don't worry, your data is stored locally in your browser and you will be
+        communicating with the Kickbase API directly. This means that the
+        password is sent nowhere else except for the official Kickbase API. All
+        the data fetching is being handled clientside.
+      </p>
     </div>
   );
 };
