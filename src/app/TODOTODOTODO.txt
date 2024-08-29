@@ -1,6 +1,11 @@
-Dark Mode adden:
-im Header links ein Icon dafür machen, was in localStorage true/false Setting ändert und dann irgendwie ein Update triggert?
+PlayerCards
 
-Login Screen schick machen
+Live Bestenliste irgendwo einbauen (+wieviele Spieler schon gespielt haben)
 
-DASHBOARDD BABY
+In den Live Points unter dem Namen ein symbol oder der grad spielt
+
+Idee: Unter League/leagueID findet man erst mal die Live Bestenliste
+da kann man dann swappen zwischen Alltime und Live
+der Live Teil hat Buttons auf jedem Manager der dann zur aktuellen
+Live Points Seite führt mit dem jeweiligen Manager als Standard-LivePlayer
+
