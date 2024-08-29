@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getRequest } from "../../../../../../misc/KickbaseAPIRequester";
+import { getRequest } from "../../../../../../../misc/KickbaseAPIRequester";
 import useLocalStorage from "use-local-storage";
 import {
   Dropdown,
@@ -14,7 +14,7 @@ import { Button } from "@nextui-org/button";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import useSWR from "swr";
-import { getFetcherSWR } from "../../../../../../misc/KickbaseAPIRequester";
+import { getFetcherSWR } from "../../../../../../../misc/KickbaseAPIRequester";
 
 export default function ManagerDropdownMenu({
   setLivePlayerId,

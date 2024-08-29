@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import useLocalStorage from "use-local-storage";
 
-import { getFetcherSWR } from "../../../../../../misc/KickbaseAPIRequester";
+import { getFetcherSWR } from "../../../../../../../misc/KickbaseAPIRequester";
 import ManagerDropdownMenu from "./ManagerDropdownMenu";
 import useSWR from "swr";
 import PlayerTableElement from "./PlayerTableElement";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Switcher from "./components/Switcher";
+import Switcher from "../components/Switcher";
 
 export default function TopStats() {
   const [playerTeam, setPlayerTeam] = useState<string>("left");
