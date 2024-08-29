@@ -63,7 +63,7 @@ export default function ManagerDropdownMenu({
               }
               onClick={() => {
                 if (user.id != livePlayerId) {
-                  setLivePlayerId(user.id);
+                  setLivePlayerId([user.id, user.name]);
                 }
               }}
             >

@@ -11,7 +11,8 @@ import PlayerTableElement from "./PlayerTableElement";
 export default function LiveTable({ leagueId }: { leagueId: string }) {
   const [userId, setUserId] = useLocalStorage("userId", "");
   const [token, setToken] = useLocalStorage("token", "");
-  const [livePlayerId, setLivePlayerId] = useState(userId);
+  const [userName, setUserName] = useLocalStorage("userName", "");
+  const [livePlayer, setLivePlayer] = useState([userId, userName]); //Array of userId and userName
   const {
     data: livePlayers,
     error,
@@ -26,14 +27,14 @@ export default function LiveTable({ leagueId }: { leagueId: string }) {
   return (
     <>
       <ManagerDropdownMenu
-        setLivePlayerId={setLivePlayerId}
-        livePlayerId={livePlayerId}
+        setLivePlayerId={setLivePlayer}
+        livePlayerId={livePlayer[0]}
         leagueId={leagueId}
       />
-      <h2 className="text-2xl">Live Points</h2>
+      <h2 className="text-2xl">Live Points for {livePlayer[1]}</h2>
       <div className="flex flex-col gap-0.5 max-w-100%">
         {livePlayers.u
-          .find((obj: any) => obj.id === livePlayerId)
+          .find((obj: any) => obj.id === livePlayer[0])
           .pl.sort((a: any, b: any) => {
             if (Number(a.t) < Number(b.t)) return 1;
           })
@@ -48,7 +49,7 @@ export default function LiveTable({ leagueId }: { leagueId: string }) {
           )}
         <div className="flex justify-end items-center text-xl py-1">
           <p className="px-18 mr-auto">Gesamt:</p>
-          <p className="pr-5">187</p>
+          <p className="pr-5">{JSON.stringify(livePlayers.u.find((obj:any) => obj.id === livePlayer[0]).t)}</p>
         </div>
       </div>
     </>
