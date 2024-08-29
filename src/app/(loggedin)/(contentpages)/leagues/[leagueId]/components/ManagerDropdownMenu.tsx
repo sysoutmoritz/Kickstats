@@ -11,6 +11,10 @@ import {
   DropdownItem,
 } from "@nextui-org/dropdown";
 import { Button } from "@nextui-org/button";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import useSWR from "swr";
+import { getFetcherSWR } from "../../../../../../misc/KickbaseAPIRequester";
 
 export default function ManagerDropdownMenu({
   setLivePlayerId,
@@ -21,32 +25,34 @@ export default function ManagerDropdownMenu({
   livePlayerId: string;
   leagueId: string;
 }) {
-  const [isLoading, setLoading] = useState(true); //loading state for client-side fetching
-  const [users, setUsers] = useState(null); //all users in this league
   const [token, setToken] = useLocalStorage("token", ""); //token for api requests
-  useEffect(() => {
-    //fetch data for this league
-    async function fetchData() {
-      const data = await getRequest(`/leagues/${leagueId}/stats`, token);
-      setUsers(data.users);
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
+  const { theme } = useTheme(); //get the current theme
+  const { data, error, isLoading } = useSWR(
+    [`/leagues/${leagueId}/stats`, token],
+    getFetcherSWR
+  );
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...ManagerDropdownMenu</div>;
   }
-  if (!users) {
+  if (error) {
     return <div>There was an error receiving your data</div>;
   }
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">Select Manager</Button>
+        <Button variant="bordered">
+          Select Manager{" "}
+          <Image
+            src={theme == "dark" ? "/dropdown_white.png" : "/dropdown_dark.png"}
+            width={12}
+            height={12}
+            alt=""
+          />
+        </Button>
       </DropdownTrigger>
       <DropdownMenu>
         <DropdownSection>
-          {users.map((user: any) => (
+          {data.users.map((user: any) => (
             <DropdownItem
               as="button"
               key={user.id}

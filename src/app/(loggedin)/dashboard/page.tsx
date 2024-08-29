@@ -11,19 +11,12 @@ export default function Dashboard() {
     <>
       <div className="flex flex-col items-center pt-12 gap-4">
         <h1 className="text-3xl text-center">Welcome, {userName}</h1>
-        <button
-          className="mt-8 inline-flex items-center justify-center rounded-xl bg-green-700 py-3 px-6 font-medium text-white transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-          onClick={() => {
-            router.push("bundesliga");
-          }}
-        >
-          General Bundesliga Stats
-        </button>
+        <h2 className="text-xl text-center py-8">Choose a league</h2>
         {leagues.map((league) => {
           return (
             <button
               key={league.id}
-              className="mt-8 inline-flex items-center justify-center rounded-xl bg-green-700 py-3 px-6 font-medium text-white transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+              className="rounded-xl bg-blue-500 py-3 px-6 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               onClick={() => {
                 router.push(`leagues/${league.id}`);
               }}

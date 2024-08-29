@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import useLocalStorage from "use-local-storage";
 
 import { getFetcherSWR } from "../../../../../../misc/KickbaseAPIRequester";
 import ManagerDropdownMenu from "./ManagerDropdownMenu";
 import useSWR from "swr";
-import PlayerListElement from "./PlayerListElement";
+import PlayerTableElement from "./PlayerTableElement";
 
 export default function LiveTable({ leagueId }: { leagueId: string }) {
   const [userId, setUserId] = useLocalStorage("userId", "");
@@ -21,7 +21,7 @@ export default function LiveTable({ leagueId }: { leagueId: string }) {
     return <div>Error: {error}</div>;
   }
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...LiveTable Component</div>;
   }
   return (
     <>
@@ -42,10 +42,14 @@ export default function LiveTable({ leagueId }: { leagueId: string }) {
             (player: object) => {
               if (player)
                 return (
-                  <PlayerListElement liveData={player} leagueId={leagueId} />
+                  <PlayerTableElement liveData={player} leagueId={leagueId} />
                 );
             }
           )}
+        <div className="flex justify-end items-center text-xl py-1">
+          <p className="px-18 mr-auto">Gesamt:</p>
+          <p className="pr-5">187</p>
+        </div>
       </div>
     </>
   );

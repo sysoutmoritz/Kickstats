@@ -5,7 +5,7 @@ export default function LeagueLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<h1>Loading...Suspense</h1>}>
         <div>{children}</div>
       </Suspense>
     </>

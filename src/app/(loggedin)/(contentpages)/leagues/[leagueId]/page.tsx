@@ -20,7 +20,7 @@ export default function League({ params }: { params: { leagueId: string } }) {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...League(s)</div>;
   }
   if (!leagueData) {
     return <div>Data is missing</div>;

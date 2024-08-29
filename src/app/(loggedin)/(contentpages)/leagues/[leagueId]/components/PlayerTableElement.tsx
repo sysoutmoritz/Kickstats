@@ -11,8 +11,8 @@ export default function PlayerListElement({
   liveData: any;
   leagueId: string;
 }) {
-  const { theme } = useTheme();
-  const [token, setToken] = useLocalStorage("token", "");
+  const { theme } = useTheme(); //get the current theme
+  const [token, setToken] = useLocalStorage("token", ""); //get the token from local storage
   const {
     data: playerData,
     error,
@@ -20,7 +20,7 @@ export default function PlayerListElement({
   } = useSWR(
     [`/leagues/${leagueId}/players/${liveData.id}`, token],
     getFetcherSWR
-  );
+  ); //fetch the player data (for profile picture, name, etc.)
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -32,26 +32,27 @@ export default function PlayerListElement({
   return (
     <button>
       <div className="flex justify-between items-center gap-0.5 border border-gray-300 py-0.5 rounded-md max-w-100%">
+        {/* player picture */}
         <Image
-          className="self-end"
+          className={playerData.profileBig ? "self-end" : "mx-3"}
           src={
             playerData.profileBig ? playerData.profileBig : "/nopicture.webp"
           }
-          width={72}
-          height={72}
+          width={playerData.profileBig ? 72 : 48}
+          height={playerData.profileBig ? 72 : 48}
           alt=""
         />
+        {/* player name */}
         <div className="flex flex-col items-start overflow-auto text-left">
           <span className="text-xs">
             {playerData.firstName ? playerData.firstName : ""}
           </span>
           <p className="text-md">
             {playerData.lastName ? playerData.lastName : ""}
-            {playerData.knownName
-              ? " (" + playerData.knownName + "Papaladopolus)"
-              : ""}
+            {playerData.knownName ? " (" + playerData.knownName + ")" : ""}
           </p>
         </div>
+        {/* player position and club*/}
         <div className="flex justify-center items-center shrink-0 ml-auto">
           <span className="text-lg p-1">
             {playerData.position ? positionCalculator(playerData.position) : ""}
@@ -67,6 +68,7 @@ export default function PlayerListElement({
             alt=""
           />
         </div>
+        {/* player points and match stats*/}
         <div className="flex flex-col justify-center pr-1">
           <span className="text-xs">Points</span>
           <span className="text-md">{liveData.t ? liveData.t : "0"}</span>
