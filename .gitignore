@@ -22,7 +22,6 @@
 /target
 /dist
 /logs
-/public
 .cache
 .vscode
 .idea
