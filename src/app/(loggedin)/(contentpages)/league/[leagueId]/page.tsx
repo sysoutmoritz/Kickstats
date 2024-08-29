@@ -32,7 +32,7 @@ export default function League({ params }: { params: { leagueId: string } }) {
     <div className="flex flex-col gap-4 justify-center items-center">
       <h1 className="text-3xl">{leagueData.name}</h1>
       <LiveTable leagueId={params.leagueId} />
-      <button className="border border-gray-800 rounded-md" onClick={() => {router.push(`/leagues/${params.leagueId}/topstats`)}}>League Topstats</button>
+      <button className="border border-gray-800 rounded-md p-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-50" onClick={() => {router.push(`/league/${params.leagueId}/topstats`)}}>League Top Stats</button>
     </div>
   );
 }

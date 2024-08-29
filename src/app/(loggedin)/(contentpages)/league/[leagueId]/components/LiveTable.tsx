@@ -49,7 +49,7 @@ export default function LiveTable({ leagueId }: { leagueId: string }) {
           )}
         <div className="flex justify-end items-center text-xl py-1">
           <p className="px-18 mr-auto">Gesamt:</p>
-          <p className="pr-5">{JSON.stringify(livePlayers.u.find((obj:any) => obj.id === livePlayer[0]).t)}</p>
+          <p className="pr-[1.875rem] text-center">{livePlayers.u.find((obj:any) => obj.id === livePlayer[0]).t}</p>
         </div>
       </div>
     </>

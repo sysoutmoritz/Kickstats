@@ -3,6 +3,7 @@ import useLocalStorage from "use-local-storage";
 import { getFetcherSWR } from "@/misc/KickbaseAPIRequester";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 export default function PlayerListElement({
   liveData,
@@ -13,6 +14,7 @@ export default function PlayerListElement({
 }) {
   const { theme } = useTheme(); //get the current theme
   const [token, setToken] = useLocalStorage("token", ""); //get the token from local storage
+  const router = useRouter();
   const {
     data: playerData,
     error,
@@ -30,7 +32,7 @@ export default function PlayerListElement({
   }
 
   return (
-    <button>
+    <button onClick={() => {router.push(`/league/${leagueId}/player/${playerData.id}`)}}>
       <div className="flex justify-between items-center gap-0.5 border border-gray-300 py-0.5 rounded-md max-w-100%">
         {/* player picture */}
         <Image
