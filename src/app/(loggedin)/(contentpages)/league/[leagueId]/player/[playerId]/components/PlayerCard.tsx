@@ -55,12 +55,15 @@ export default function PlayerCard({
           {player.knownName != undefined ? " (" + player.knownName + ")" : ""}
         </p>
       </div>
-      {/* div for player position, picture, club */}
+      {/* div for player position, status, picture, club */}
       <div className="flex justify-evenly items-center">
-        {/* div for player position */}
-        <div className="flex flex-col items-center gap-4 w-18 h-24">
+        {/* div for player position and status*/}
+        <div className="flex flex-col items-center w-18">
           <p className="text-xl">Position</p>
           <p>{positionCalculator(stats.position)}</p>
+          <p className="text-xl mt-3">Status</p>
+          <p className="text-sm">{statusCalculator(stats.status)[0]}</p>
+          <Image src={statusCalculator(stats.status)[1]} width={20} height={20} alt="" />
         </div>
         {/* player picture */}
         <Image src={player.profileBig} alt="" width={204} height={204} />
@@ -118,6 +121,28 @@ export default function PlayerCard({
             }
             /{leagueStats.currentDay}
           </p>
+        </div>
+        {/*div for G/A */}
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-xl">G/A</p>
+          {/* div for goals */}
+          <div className="flex justify-center items-center gap-2">
+          <Image src={theme=="dark" ? "/live_icons/goal_white.svg" : "/live_icons/goal_dark.svg"} width={12} height={12} alt ="" />
+          <p>{
+              stats.seasons.find(
+                (obj: any) => obj.season === process.env.SEASON
+              ).goals
+            }</p>
+          </div>
+          {/* div for assists */}
+          <div className="flex justify-center items-center gap-2">
+          <Image src={theme=="dark" ? "/live_icons/assist_white.svg" : "/live_icons/assist_dark.svg"} width={12} height={12} alt ="" />
+          <p>{
+              stats.seasons.find(
+                (obj: any) => obj.season === process.env.SEASON
+              ).assists
+            }</p>
+          </div>
         </div>
       </div>
       {/* div for market stats */}
@@ -222,6 +247,7 @@ export default function PlayerCard({
   );
 }
 
+//returns the position based of the number in the API
 function positionCalculator(position: number) {
   switch (position) {
     case 1:
@@ -234,5 +260,29 @@ function positionCalculator(position: number) {
       return "ST";
     default:
       return "UKN";
+  }
+}
+
+//returns the health status based of the number in the API
+function statusCalculator(status: number) {
+  switch(status) {
+    case 0:
+      return ["Fit", "/status_icons/fit.svg"];
+    case 1:
+      return ["Injured", "/status_icons/injured.svg"];
+    case 2:
+      return ["Weakened", "/status_icons/weakened.svg"];
+    case 4:
+      return ["Rehab", "/status_icons/rehab.svg"];
+    case 8:
+      return ["Red Card", "/status_icons/red.svg"];
+    case 32:
+      return ["5th Yellow Card", "/status_icons/yellow.svg"];
+    case 128:
+      return ["Left League", "/status_icons/left_league.svg"];
+    case 256:
+      return ["Absent", "/status_icons/absent.svg"];
+    default:
+      return ["Unknown", "/status_icons/unknown.svg"]
   }
 }
