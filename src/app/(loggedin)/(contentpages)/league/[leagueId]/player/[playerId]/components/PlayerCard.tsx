@@ -169,51 +169,47 @@ export default function PlayerCard({
           </p>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-2">
-        {/* owner */}
-        <div className="flex justify-center items-center gap-3">
-          <p className="text-xl pr-4">Owned by:</p>
-          {stats.leaguePlayer != undefined ? (
-            <div className="flex flex-col justify-center items-start">
-              {/* player owner + picture */}
-              <div className="flex justify-center items-center gap-2">
-                <Image
-                  className="rounded-[50%] w-6 h-6"
-                  src={stats.leaguePlayer.userProfileUrl}
-                  width={24}
-                  height={24}
-                  alt=""
-                />
-                <p>{stats.leaguePlayer.userName}</p>
-              </div>
-              {/* buy time (only rendered if it was actually bought and not drawn at the beginning) */}
-              {stats.leaguePlayer.buyDate != undefined ? (
-                <div className="flex flex-col justify-center items-start">
-                  <div className="flex justify-center items-center gap-2">
-                    <p>Bought:</p>
-                    <p>
-                      {new Date(stats.leaguePlayer.buyDate).toLocaleString()}
-                    </p>
-                  </div>
-                  {/* buy price (only rendered if it was actually bought and not drawn at the beginning) */}
-                  <div className="flex justify-center items-center gap-2">
-                    <p>For:</p>
-                    <p>
-                      {new Intl.NumberFormat("de-DE").format(
-                        stats.leaguePlayer.buyPrice
-                      )}
-                      €
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <p className="text-sm">drawn at start</p>
-              )}
+      {/* div for ownership */}
+      <div className="flex justify-center items-center gap-3">
+        <p className="text-xl pr-4">Owned by:</p>
+        {stats.leaguePlayer != undefined ? (
+          <div className="flex flex-col justify-center items-start">
+            {/* div for player owner + picture */}
+            <div className="flex justify-center items-center gap-2">
+              <Image
+                className="rounded-[50%] w-6 h-6"
+                src={stats.leaguePlayer.userProfileUrl}
+                width={24}
+                height={24}
+                alt=""
+              />
+              <p>{stats.leaguePlayer.userName}</p>
             </div>
-          ) : (
-            "Nobody"
-          )}
-        </div>
+            {/* buy time (only rendered if it was actually bought and not drawn at the beginning) */}
+            {stats.leaguePlayer.buyDate != undefined ? (
+              <div className="flex flex-col justify-center items-start">
+                <div className="flex justify-center items-center gap-2">
+                  <p>Bought:</p>
+                  <p>{new Date(stats.leaguePlayer.buyDate).toLocaleString()}</p>
+                </div>
+                {/* buy price (only rendered if it was actually bought and not drawn at the beginning) */}
+                <div className="flex justify-center items-center gap-2">
+                  <p>For:</p>
+                  <p>
+                    {new Intl.NumberFormat("de-DE").format(
+                      stats.leaguePlayer.buyPrice
+                    )}
+                    €
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm">drawn at start</p>
+            )}
+          </div>
+        ) : (
+          "Nobody"
+        )}
       </div>
     </div>
   );
