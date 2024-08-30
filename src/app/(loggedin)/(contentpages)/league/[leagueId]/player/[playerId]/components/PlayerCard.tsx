@@ -211,6 +211,9 @@ export default function PlayerCard({
           "Nobody"
         )}
       </div>
+      <div className="flex justify-center items-center gap-3">
+        <p>TODO: add next 3 games (too late rn)</p>
+      </div>
     </div>
   );
 }
