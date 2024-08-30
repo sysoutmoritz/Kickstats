@@ -178,7 +178,11 @@ export default function PlayerCard({
             <div className="flex justify-center items-center gap-2">
               <Image
                 className="rounded-[50%] w-6 h-6"
-                src={stats.leaguePlayer.userProfileUrl}
+                src={
+                  stats.leaguePlayer.userProfileUrl != undefined
+                    ? stats.leaguePlayer.userProfileUrl
+                    : "/nopicture.webp"
+                }
                 width={24}
                 height={24}
                 alt=""
