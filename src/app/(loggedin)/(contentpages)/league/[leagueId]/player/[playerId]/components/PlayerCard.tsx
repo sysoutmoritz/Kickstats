@@ -121,53 +121,52 @@ export default function PlayerCard({
         </div>
       </div>
       {/* div for market stats */}
-      <div className="flex justify-center items-center gap-2">
-        {/* div for market value + trend */}
-        <div className="flex justify-center gap-6 items-center">
-          <p className="text-xl">Market Value:</p>
-          <div className="flex flex-col justify-center items-center gap-1">
-            <div className="flex justify-center items-center gap-0.5">
-              {/* market value */}
-              <p>{new Intl.NumberFormat("de-DE").format(stats.marketValue)}€</p>
-              {/* market value trend */}
-              <Image
-                className={
-                  stats.mvTrend == 1
-                    ? "-rotate-45"
-                    : stats.mvTrend == 2
-                    ? "rotate-45"
-                    : ""
-                }
-                src={
-                  theme == "dark"
-                    ? "/arrow_right_white.svg"
-                    : "/arrow_right_dark.svg"
-                }
-                width={24}
-                height={24}
-                alt=""
-              />
-            </div>
-            <p className="text-sm">
-              {/* market value change since yesterday */}
-              <span
-                className={
-                  stats.marketValue -
-                    stats.marketValues[stats.marketValues.length - 2].m <
-                  0
-                    ? "text-red-600 text-base"
-                    : "text-green-600 text-base"
-                }
-              >
-                {new Intl.NumberFormat("de-DE").format(
-                  stats.marketValue -
-                    stats.marketValues[stats.marketValues.length - 2].m
-                )}
-                €
-              </span>
-              {" since yesterday"}
-            </p>
+      <div className="flex justify-center items-center gap-6">
+        <p className="text-xl">Market Value:</p>
+        {/* div for market value, trend and change since yesterday */}
+        <div className="flex flex-col justify-center items-center gap-1">
+          {/* div for market value + trend */}
+          <div className="flex justify-center items-center gap-0.5">
+            {/* market value */}
+            <p>{new Intl.NumberFormat("de-DE").format(stats.marketValue)}€</p>
+            {/* market value trend */}
+            <Image
+              className={
+                stats.mvTrend == 1
+                  ? "-rotate-45"
+                  : stats.mvTrend == 2
+                  ? "rotate-45"
+                  : ""
+              }
+              src={
+                theme == "dark"
+                  ? "/arrow_right_white.svg"
+                  : "/arrow_right_dark.svg"
+              }
+              width={24}
+              height={24}
+              alt=""
+            />
           </div>
+          <p className="text-sm">
+            {/* market value change since yesterday */}
+            <span
+              className={
+                stats.marketValue -
+                  stats.marketValues[stats.marketValues.length - 2].m <
+                0
+                  ? "text-red-600 text-base"
+                  : "text-green-600 text-base"
+              }
+            >
+              {new Intl.NumberFormat("de-DE").format(
+                stats.marketValue -
+                  stats.marketValues[stats.marketValues.length - 2].m
+              )}
+              €
+            </span>
+            {" since yesterday"}
+          </p>
         </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-2">
