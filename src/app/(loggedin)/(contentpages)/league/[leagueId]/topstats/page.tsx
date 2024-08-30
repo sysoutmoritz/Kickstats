@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Switcher from "./components/Switcher";
+import Switcher from "../components/Switcher";
 
-export default function Bundesliga() {
+export default function TopStats() {
   const [playerTeam, setPlayerTeam] = useState<string>("left");
   const [matchdaySeason, setMatchdaySeason] = useState<string>("left");
-  let response;
   let numbersList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   useEffect(() => {
@@ -30,6 +29,7 @@ export default function Bundesliga() {
           setSwitchState={setMatchdaySeason}
         />
         <div>
+        <h1>to be implemented</h1>
           {numbersList.map((nmb) => {
             return (
               <div

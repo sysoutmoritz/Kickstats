@@ -18,7 +18,7 @@ export default function Dashboard() {
               key={league.id}
               className="rounded-xl bg-blue-500 py-3 px-6 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               onClick={() => {
-                router.push(`leagues/${league.id}`);
+                router.push(`league/${league.id}`);
               }}
             >
               {league.name}
