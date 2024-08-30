@@ -47,7 +47,7 @@ export default function PlayerCard({
   }
   return (
     <div className="flex flex-col justify-center items-center gap-2">
-      {/* player name */}
+      {/* div for player name */}
       <div className="flex flex-col justify-center items-center gap-1">
         <p className="text-md">{stats.firstName}</p>
         <p className="text-2xl">
@@ -55,16 +55,16 @@ export default function PlayerCard({
           {player.knownName != undefined ? " (" + player.knownName + ")" : ""}
         </p>
       </div>
-      {/* player position, picture, club */}
+      {/* div for player position, picture, club */}
       <div className="flex justify-evenly items-center">
-        {/* player position */}
+        {/* div for player position */}
         <div className="flex flex-col items-center gap-4 w-18 h-24">
           <p className="text-xl">Position</p>
           <p>{positionCalculator(stats.position)}</p>
         </div>
         {/* player picture */}
         <Image src={player.profileBig} alt="" width={204} height={204} />
-        {/* player club */}
+        {/* div for player club */}
         <div className="flex flex-col items-center gap-1 w-18 h-24">
           <p className="text-xl">Club</p>
           <Image
@@ -75,16 +75,16 @@ export default function PlayerCard({
           />
         </div>
       </div>
-      {/* match stats */}
+      {/* div for match stats */}
       <div className="flex justify-center items-start gap-6">
-        {/* points */}
+        {/* div for points */}
         <div className="flex flex-col justify-center items-center">
           <p className="text-xl">Points</p>
           <p>{stats.points}</p>
           {/* average points */}
           <p className="text-xs">&empty; P: {stats.averagePoints}</p>
         </div>
-        {/* matches */}
+        {/* div for matches */}
         <div className="flex flex-col justify-center items-center">
           <p className="text-xl">Matches</p>
           <p>
@@ -107,7 +107,7 @@ export default function PlayerCard({
             )}
           </p>
         </div>
-        {/* starting matches */}
+        {/* div for starting matches */}
         <div className="flex flex-col justify-center items-center">
           <p className="text-xl">Starting</p>
           <p>
@@ -120,9 +120,9 @@ export default function PlayerCard({
           </p>
         </div>
       </div>
-      {/* market stats */}
+      {/* div for market stats */}
       <div className="flex justify-center items-center gap-2">
-        {/* market value */}
+        {/* div for market value + trend */}
         <div className="flex justify-center gap-6 items-center">
           <p className="text-xl">Market Value:</p>
           <div className="flex flex-col justify-center items-center gap-1">
