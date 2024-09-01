@@ -272,7 +272,7 @@ export default function PlayerCard({
             </div>
             {/* buy time (only rendered if it was actually bought and not drawn at the beginning) */}
             {stats.leaguePlayer.buyDate != undefined ? (
-              <div className="flex flex-col justify-center items-start">
+              <div className="flex flex-col justify-center items-start text-sm">
                 <div className="flex justify-center items-center gap-2">
                   <p>Bought:</p>
                   <p>{new Date(stats.leaguePlayer.buyDate).toLocaleString()}</p>

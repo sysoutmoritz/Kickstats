@@ -32,7 +32,11 @@ export default function PlayerListElement({
   }
 
   return (
-    <button onClick={() => {router.push(`/league/${leagueId}/player/${playerData.id}`)}}>
+    <button
+      onClick={() => {
+        router.push(`/league/${leagueId}/player/${playerData.id}`);
+      }}
+    >
       <div className="flex justify-between items-center gap-0.5 border border-gray-300 py-0.5 rounded-md max-w-100%">
         {/* player picture */}
         <Image
@@ -56,9 +60,9 @@ export default function PlayerListElement({
         </div>
         {/* player position and club*/}
         <div className="flex justify-center items-center shrink-0 ml-auto">
-          <span className="text-lg p-1">
+          <p className="text-lg p-1">
             {playerData.position ? positionCalculator(playerData.position) : ""}
-          </span>
+          </p>
           <Image
             src={
               playerData.teamId
