@@ -197,10 +197,10 @@ export default function PlayerCard({
         </div>
       </div>
       {/* div for market stats */}
-      <div className="flex justify-center items-center gap-6">
-        <p className="text-xl">Market Value:</p>
+      <div className="flex justify-evenly items-center mr-auto ml-5 gap-6">
+        <p className="text-xl">Market Value</p>
         {/* div for market value, trend and change since yesterday */}
-        <div className="flex flex-col justify-center items-center gap-1">
+        <div className="flex flex-col justify-center items-start gap-1">
           {/* div for market value + trend */}
           <div className="flex justify-center items-center gap-0.5">
             {/* market value */}
@@ -251,12 +251,12 @@ export default function PlayerCard({
         </div>
       </div>
       {/* div for ownership */}
-      <div className="flex justify-center items-center gap-3">
-        <p className="text-xl pr-4">Owned by:</p>
+      <div className="flex justify-evenly items-center gap-8 mr-auto ml-5">
+        <p className="text-xl pr-4">Owned by</p>
         {stats.leaguePlayer != undefined ? (
           <div className="flex flex-col justify-center items-start">
-            {/* div for player owner + picture */}
             <div className="flex justify-center items-center gap-2">
+              {/* div for player owner + picture */}
               <Image
                 className="rounded-[50%] w-6 h-6"
                 src={
@@ -293,32 +293,34 @@ export default function PlayerCard({
             )}
           </div>
         ) : (
-          "Nobody"
+          <p>Nobody</p>
         )}
       </div>
-      <div className="flex flex-col justify-center items-center gap-3">
+      <div className="flex flex-col justify-center items-center gap-3 mt-2">
         <p className="text-xl">Next 3 Matches</p>
-        <NextThreeMatches
-          homeTeamId={stats.nm[0].t1i}
-          awayTeamId={stats.nm[0].t2i}
-          homeTeamAbb={stats.nm[0].t1y}
-          awayTeamAbb={stats.nm[0].t2y}
-          date={stats.nm[0].d}
-        />
-        <NextThreeMatches
-          homeTeamId={stats.nm[1].t1i}
-          awayTeamId={stats.nm[1].t2i}
-          homeTeamAbb={stats.nm[1].t1y}
-          awayTeamAbb={stats.nm[1].t2y}
-          date={stats.nm[1].d}
-        />
-        <NextThreeMatches
-          homeTeamId={stats.nm[2].t1i}
-          awayTeamId={stats.nm[2].t2i}
-          homeTeamAbb={stats.nm[2].t1y}
-          awayTeamAbb={stats.nm[2].t2y}
-          date={stats.nm[2].d}
-        />
+        <div className="flex justify-center items-center gap-2">
+          <NextThreeMatches
+            homeTeamId={stats.nm[0].t1i}
+            awayTeamId={stats.nm[0].t2i}
+            homeTeamAbb={stats.nm[0].t1y}
+            awayTeamAbb={stats.nm[0].t2y}
+            date={stats.nm[0].d}
+          />
+          <NextThreeMatches
+            homeTeamId={stats.nm[1].t1i}
+            awayTeamId={stats.nm[1].t2i}
+            homeTeamAbb={stats.nm[1].t1y}
+            awayTeamAbb={stats.nm[1].t2y}
+            date={stats.nm[1].d}
+          />
+          <NextThreeMatches
+            homeTeamId={stats.nm[2].t1i}
+            awayTeamId={stats.nm[2].t2i}
+            homeTeamAbb={stats.nm[2].t1y}
+            awayTeamAbb={stats.nm[2].t2y}
+            date={stats.nm[2].d}
+          />
+        </div>
       </div>
     </div>
   );
