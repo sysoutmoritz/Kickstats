@@ -182,7 +182,7 @@ function isPlayerInLineup(matchdayData: any, playerId: string) {
 function getMatchInfo(matchdayData: any, teamId: string, pn: string) {
   console.log("CALL FOR ", pn);
   for (let match of matchdayData.md) {
-    let matchDetails = match.m; // Access the first (and only) element, i dont know why this is list a list in the first place
+    let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
     console.log(`IN FOR, NAME ${pn}, TEAMID ${teamId}, DETAILS`, matchDetails);
     if (matchDetails.t1i === teamId || matchDetails.t2i === teamId) {
       console.log(`details for ${teamId}: ${matchDetails}`);

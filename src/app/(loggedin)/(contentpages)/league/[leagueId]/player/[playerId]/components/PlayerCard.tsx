@@ -197,7 +197,7 @@ export default function PlayerCard({
         </div>
       </div>
       {/* div for market stats */}
-      <div className="flex justify-evenly items-center mr-auto ml-5 gap-6">
+      <div className="flex justify-evenly items-center ml-5 gap-6">
         <p className="text-xl">Market Value</p>
         {/* div for market value, trend and change since yesterday */}
         <div className="flex flex-col justify-center items-start gap-1">
@@ -251,7 +251,7 @@ export default function PlayerCard({
         </div>
       </div>
       {/* div for ownership */}
-      <div className="flex justify-evenly items-center gap-8 mr-auto ml-5">
+      <div className="flex justify-evenly items-center gap-8ml-5">
         <p className="text-xl pr-4">Owned by</p>
         {stats.leaguePlayer != undefined ? (
           <div className="flex flex-col justify-center items-start">
