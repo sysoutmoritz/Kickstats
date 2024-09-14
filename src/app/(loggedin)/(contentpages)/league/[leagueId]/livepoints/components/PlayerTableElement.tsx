@@ -180,12 +180,13 @@ function isPlayerInLineup(matchdayData: any, playerId: string) {
 }
 
 function getMatchInfo(matchdayData: any, teamId: string, pn: string) {
-  console.log("CALL FOR ", pn);
+  if(pn=="Koch") console.log("CALL FOR ", pn);
   for (let match of matchdayData.md) {
+    if(pn=="Koch") console.log(match);
     let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
-    console.log(`IN FOR, NAME ${pn}, TEAMID ${teamId}, DETAILS`, matchDetails);
+    if(pn=="Koch") console.log(`IN FOR, NAME ${pn}, TEAMID ${teamId}, DETAILS`, matchDetails);
     if (matchDetails.t1i === teamId || matchDetails.t2i === teamId) {
-      console.log(`details for ${teamId}: ${matchDetails}`);
+      if(pn=="Koch") console.log(`details for ${teamId}: ${matchDetails}`);
       return matchDetails;
     }
     return undefined;
