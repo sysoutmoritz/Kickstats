@@ -53,7 +53,10 @@ export default function LiveTable({
             //map each player to a PlayerTableElement
             if (player)
               return (
-                <PlayerTableElement liveData={player} leagueId={leagueId} />
+                <PlayerTableElement
+                  livePlayerData={player}
+                  leagueId={leagueId}
+                />
               );
           })}
         <div className="flex justify-end items-center text-xl py-1">

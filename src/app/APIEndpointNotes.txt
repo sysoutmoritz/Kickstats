@@ -2,3 +2,13 @@
 
 /leagues/{leagueID}/players/{playerID} für die Live Karten
 /leagues/{leagueID}/players/{playerID}/stats für die Top25 / klicken auf den Spieler in der Liveliste
+
+/leagues/{leagueID}/live hat dann beim Spieltag oben dann die ganzen Matches, unter den Teams jeweils "ts" -> aktuelle Minute des Spiels
+auch der Kader der Mannschaft -> wenn nicht im Kader gilt er automatisch als gespielt
+unter "ts" ist "s", alle fertigen Games haben Wert 2, aktuelles Game hat Wert 8
+
+s Werte:
+Noch nicht gestartet: 0
+Halbzeit: 4
+Fertig: 2 (angeblich)
+2. Hälfte: 8
