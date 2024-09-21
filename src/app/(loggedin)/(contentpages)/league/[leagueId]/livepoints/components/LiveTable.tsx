@@ -49,11 +49,12 @@ export default function LiveTable({
             //get the "pl" list from the found manager with all his players, sort it by the points
             if (Number(a.t) > Number(b.t)) return -1;
           })
-          .map((player: object) => {
+          .map((player: any) => {
             //map each player to a PlayerTableElement
             if (player)
               return (
                 <PlayerTableElement
+                  key={player.id}
                   livePlayerData={player}
                   leagueId={leagueId}
                 />

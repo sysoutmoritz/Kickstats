@@ -28,7 +28,6 @@ export default function PlayerListElement({
     error: liveError,
     isLoading: liveLoading,
   } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR); //fetch the live data
-  let matchInfo = getMatchInfo(liveData, livePlayerData.tid, livePlayerData.n); //check if the player is in the lineup
 
   if (error || liveError) {
     return <div>Error: {error}</div>;
@@ -56,16 +55,23 @@ export default function PlayerListElement({
         />
         {/* player name and status */}
         <div className="flex flex-col items-start overflow-auto text-left">
-          <p className="text-xs">
-            {playerData.firstName ? playerData.firstName : ""}
-          </p>
-          <p className="text-md">
-            {playerData.lastName ? playerData.lastName : ""}
-            {playerData.knownName ? " (" + playerData.knownName + ")" : ""}
-          </p>
-          <p className="text-xs">
-            s: {matchInfo != undefined ? matchInfo.s : "und"}
-          </p>
+          {playerData.knownName ? (
+            <p className="text-md mt-3">
+              {playerData.knownName ? playerData.knownName : ""}
+            </p>
+          ) : (
+            <div>
+              <p className="text-xs">
+                {playerData.firstName ? playerData.firstName : ""}
+              </p>
+              <p className="text-md">
+                {playerData.lastName ? playerData.lastName : ""}
+              </p>
+            </div>
+          )}
+          <div className="text-xs">
+            {playerStatusLogic(liveData, livePlayerData.tid, livePlayerData.id)}
+          </div>
         </div>
         {/* player position and club*/}
         <div className="flex justify-center items-center shrink-0 ml-auto">
@@ -162,33 +168,38 @@ function positionCalculator(position: number) {
   }
 }
 
-function isPlayerInLineup(matchdayData: any, playerId: string) {
-  for (let match of matchdayData.md) {
-    if (match.m && match.m.length > 0) {
-      let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
-      if (matchDetails.t1l != undefined && matchDetails.t2l != undefined) {
-        if (
-          matchDetails.t1l.includes(playerId) || // Check in team 1 lineup
-          matchDetails.t2l.includes(playerId) // Check in team 2 lineup
-        ) {
-          return true; // Player found in one of the lineups
-        }
+function playerStatusLogic(
+  matchdayData: any,
+  teamId: string,
+  playerId: string
+) {
+  let matchInfo = undefined;
+  for (const match of matchdayData.md) {
+    for (const matchDetails of match.m) {
+      //let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
+      if (matchDetails.t1i === teamId || matchDetails.t2i === teamId) {
+        matchInfo = matchDetails;
       }
     }
   }
-  return false; // Player not found in any match
-}
-
-function getMatchInfo(matchdayData: any, teamId: string, pn: string) {
-  if(pn=="Koch") console.log("CALL FOR ", pn);
-  for (let match of matchdayData.md) {
-    if(pn=="Koch") console.log(match);
-    let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
-    if(pn=="Koch") console.log(`IN FOR, NAME ${pn}, TEAMID ${teamId}, DETAILS`, matchDetails);
-    if (matchDetails.t1i === teamId || matchDetails.t2i === teamId) {
-      if(pn=="Koch") console.log(`details for ${teamId}: ${matchDetails}`);
-      return matchDetails;
-    }
-    return undefined;
+  if (matchInfo.s == 2) {
+    return <p className="text-yellow-100">MATCH OVER</p>;
+  }
+  if (
+    matchInfo.t1l != undefined &&
+    matchInfo.t2l != undefined &&
+    !(matchInfo.t1l.includes(playerId) || matchInfo.t2l.includes(playerId))
+  ) {
+    //lineup present and player not in lineup
+    return <p className="text-yellow-100">NOT IN SQUAD</p>;
+  }
+  if (matchInfo.s == 1 || matchInfo.s == 8) {
+    return <p className="text-red-600 font-bold">LIVE</p>;
+  }
+  if (matchInfo.s == 4) {
+    return <p className="text-blue-100">HALFTIME</p>;
+  }
+  if (matchInfo.s == 0) {
+    return <p className="text-yellow-100">MATCH IN FUTURE</p>;
   }
 }
