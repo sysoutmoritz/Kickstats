@@ -6,10 +6,10 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 
 export default function PlayerListElement({
-  liveData,
+  livePlayerData,
   leagueId,
 }: {
-  liveData: any;
+  livePlayerData: any;
   leagueId: string;
 }) {
   const { theme } = useTheme(); //get the current theme
@@ -20,19 +20,28 @@ export default function PlayerListElement({
     error,
     isLoading,
   } = useSWR(
-    [`/leagues/${leagueId}/players/${liveData.id}`, token],
+    [`/leagues/${leagueId}/players/${livePlayerData.id}`, token],
     getFetcherSWR
   ); //fetch the player data (for profile picture, name, etc.)
+  const {
+    data: liveData,
+    error: liveError,
+    isLoading: liveLoading,
+  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR); //fetch the live data
 
-  if (error) {
+  if (error || liveError) {
     return <div>Error: {error}</div>;
   }
-  if (isLoading) {
+  if (isLoading || liveLoading) {
     return <></>;
   }
 
   return (
-    <button onClick={() => {router.push(`/league/${leagueId}/player/${playerData.id}`)}}>
+    <button
+      onClick={() => {
+        router.push(`/league/${leagueId}/player/${playerData.id}`);
+      }}
+    >
       <div className="flex justify-between items-center gap-0.5 border border-gray-300 py-0.5 rounded-md max-w-100%">
         {/* player picture */}
         <Image
@@ -44,21 +53,31 @@ export default function PlayerListElement({
           height={playerData.profileBig ? 72 : 48}
           alt=""
         />
-        {/* player name */}
+        {/* player name and status */}
         <div className="flex flex-col items-start overflow-auto text-left">
-          <span className="text-xs">
-            {playerData.firstName ? playerData.firstName : ""}
-          </span>
-          <p className="text-md">
-            {playerData.lastName ? playerData.lastName : ""}
-            {playerData.knownName ? " (" + playerData.knownName + ")" : ""}
-          </p>
+          {playerData.knownName ? (
+            <p className="text-md mt-3">
+              {playerData.knownName ? playerData.knownName : ""}
+            </p>
+          ) : (
+            <div>
+              <p className="text-xs">
+                {playerData.firstName ? playerData.firstName : ""}
+              </p>
+              <p className="text-md">
+                {playerData.lastName ? playerData.lastName : ""}
+              </p>
+            </div>
+          )}
+          <div className="text-xs">
+            {playerStatusLogic(liveData, livePlayerData.tid, livePlayerData.id)}
+          </div>
         </div>
         {/* player position and club*/}
         <div className="flex justify-center items-center shrink-0 ml-auto">
-          <span className="text-lg p-1">
+          <p className="text-lg p-1">
             {playerData.position ? positionCalculator(playerData.position) : ""}
-          </span>
+          </p>
           <Image
             src={
               playerData.teamId
@@ -73,9 +92,11 @@ export default function PlayerListElement({
         {/* player points and match stats*/}
         <div className="flex flex-col justify-center pr-1">
           <span className="text-xs">Points</span>
-          <span className="text-md">{liveData.t ? liveData.t : "0"}</span>
+          <span className="text-md">
+            {livePlayerData.t ? livePlayerData.t : "0"}
+          </span>
           <div className="flex justify-center flex-wrap w-16 gap-[1px]">
-            {[...Array(liveData.g)].map((e, i) => {
+            {[...Array(livePlayerData.g)].map((e, i) => {
               return (
                 <Image
                   key={i}
@@ -90,7 +111,7 @@ export default function PlayerListElement({
                 />
               );
             })}
-            {[...Array(liveData.a)].map((e, i) => {
+            {[...Array(livePlayerData.a)].map((e, i) => {
               return (
                 <Image
                   key={i}
@@ -105,17 +126,17 @@ export default function PlayerListElement({
                 />
               );
             })}
-            {liveData.y > 0 ? (
+            {livePlayerData.y > 0 ? (
               <Image src="/live_icons/yellow.svg" width={8} height={8} alt="" />
             ) : (
               <></>
             )}
-            {liveData.r > 0 ? (
+            {livePlayerData.r > 0 ? (
               <Image src="/live_icons/red.svg" width={8} height={8} alt="" />
             ) : (
               <></>
             )}
-            {liveData.yr > 0 ? (
+            {livePlayerData.yr > 0 ? (
               <Image
                 src="/live_icons/yellowred.svg"
                 width={8}
@@ -144,5 +165,41 @@ function positionCalculator(position: number) {
       return "ST";
     default:
       return "UKN";
+  }
+}
+
+function playerStatusLogic(
+  matchdayData: any,
+  teamId: string,
+  playerId: string
+) {
+  let matchInfo = undefined;
+  for (const match of matchdayData.md) {
+    for (const matchDetails of match.m) {
+      //let matchDetails = match.m[0]; // Access the first (and only) element, i dont know why this is list a list in the first place
+      if (matchDetails.t1i === teamId || matchDetails.t2i === teamId) {
+        matchInfo = matchDetails;
+      }
+    }
+  }
+  if (matchInfo.s == 2) {
+    return <p className="text-yellow-100">MATCH OVER</p>;
+  }
+  if (
+    matchInfo.t1l != undefined &&
+    matchInfo.t2l != undefined &&
+    !(matchInfo.t1l.includes(playerId) || matchInfo.t2l.includes(playerId))
+  ) {
+    //lineup present and player not in lineup
+    return <p className="text-yellow-100">NOT IN SQUAD</p>;
+  }
+  if (matchInfo.s == 1 || matchInfo.s == 8) {
+    return <p className="text-red-600 font-bold">LIVE</p>;
+  }
+  if (matchInfo.s == 4) {
+    return <p className="text-blue-100">HALFTIME</p>;
+  }
+  if (matchInfo.s == 0) {
+    return <p className="text-yellow-100">MATCH IN FUTURE</p>;
   }
 }
