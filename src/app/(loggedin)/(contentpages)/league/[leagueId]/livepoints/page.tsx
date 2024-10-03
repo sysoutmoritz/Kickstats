@@ -13,11 +13,11 @@ export default function LivePoints({
   params: { leagueId: string };
 }) {
   const [token, setToken] = useLocalStorage("token", "");
-  const [userId, setUserId] = useLocalStorage("userId", "");
   const [leagueData, setLeagueData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [managerId, setManagerId] = useState(searchParams.get("manager")); //Id of Manager to show live points for
   useEffect(() => {
     getRequest("/leagues", token).then((data) => {
       setLeagueData(
@@ -39,8 +39,17 @@ export default function LivePoints({
       <h1 className="text-3xl">{leagueData.name}</h1>
       <LiveTable
         leagueId={params.leagueId}
-        clickedPlayer={searchParams.get("clickedPlayerId")}
+        managerId={managerId}
+        setManagerId={setManagerId}
       />
+      <button
+        className="border border-gray-800 rounded-md p-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-50"
+        onClick={() => {
+          router.push(`/league/${params.leagueId}/tradehistory/${managerId}`);
+        }}
+      >
+        Trade History
+      </button>
       <button
         className="border border-gray-800 rounded-md p-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-50"
         onClick={() => {
