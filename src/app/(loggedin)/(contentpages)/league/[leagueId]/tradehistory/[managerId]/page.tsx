@@ -91,11 +91,11 @@ export default function TradeHistory({
 }
 
 function getCompleteTradeHistoryList(history: any) {
-  console.log("AT getCompleteTradeHistoryList BEGINNING", history);
   let historyList = history
     .map((trade: any) => {
+      //map the full response only to the "it" (items) lists
       return trade.it;
     })
-    .flat();
+    .flat(); //flatten all the lists into one big list
   return historyList;
 }
