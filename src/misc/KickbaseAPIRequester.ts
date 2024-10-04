@@ -64,7 +64,6 @@ export async function getHistoryFetcherSWR([url, token, offsetLength]:[string, s
     let list: any = []; //the list to save the data from the multiple requests
     let offset = 0; //offset increasing with every request
     let data; //the data for the current request
-    console.log("IN HISTORYFETCHER HELLOOO");
     if(token) {
         do {
             const response = await fetch(baseURL + url + "?start=" + offset, {
@@ -76,9 +75,7 @@ export async function getHistoryFetcherSWR([url, token, offsetLength]:[string, s
             },
             });
             if (response.status === 200) {
-                console.log("GOT RESPONSE WITH OFFSET: " + offset);
                 data = await response.json();
-                console.log("REPONSE IS: " + data);
                 list = list.concat(data);
                 offset += offsetLength;
             } else {
