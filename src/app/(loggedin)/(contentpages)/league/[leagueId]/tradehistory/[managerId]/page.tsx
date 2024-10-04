@@ -58,7 +58,6 @@ export default function TradeHistory({
             let mv = values.marketValues.find(
               (value: any) => value.d == drawtime
             )?.m; //get the market value of the player at the drawtime
-            console.log(`MV for ${trade.pn}`, mv);
             return { ...trade, trp: mv }; //return the trade with the market value
           } else {
             return trade; //return the trade as it is if tty is not 0
