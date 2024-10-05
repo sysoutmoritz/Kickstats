@@ -73,6 +73,16 @@ export default function TransferHistoryElement({
           </p>
         </div>
       </div>
+      {/* vertical line */}
+      <div className="border-l border-gray-300 h-10"></div>
+      {/* profit */}
+      <p
+        className={
+          +sellValue - +buyValue < 0 ? "text-red-600" : "text-green-600"
+        }
+      >
+        {new Intl.NumberFormat("de-DE").format(+sellValue - +buyValue)}€
+      </p>
     </div>
   );
 }

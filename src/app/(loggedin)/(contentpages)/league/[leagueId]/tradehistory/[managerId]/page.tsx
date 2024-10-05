@@ -76,6 +76,7 @@ export default function TradeHistory({
   let finalPairs: { [key: string]: [string, string] } = {}; //map to store the final pairs of trades and their corresponding squad, usage: player_id -> [buy_value, sell_value]
   let currentSquad: { [key: string]: string } = {}; //map to store the current squad, usage: player_id -> buy_value
   list.forEach((trade: any) => {
+    console.log("TRADE ID: ", trade.pi);
     if (trade.tty === 2) {
       //if trade is a sell, it has to be owned some time before
       finalPairs[trade.pi] = [undefined, trade.trp];
@@ -97,6 +98,7 @@ export default function TradeHistory({
         Trade History for {history ? history[0].unm : ""}
       </h2>
       {Object.keys(finalPairs).map((key) => {
+        console.log("ABOUT TO MAKE TRADE HISTORY ELEMENT", key);
         return (
           <div key={key}>
             <TransferHistoryElement
