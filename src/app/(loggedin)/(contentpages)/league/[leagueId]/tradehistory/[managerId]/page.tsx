@@ -5,6 +5,7 @@ import { getHistoryFetcherSWR } from "@/misc/KickbaseAPIRequester";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { getRequest } from "@/misc/KickbaseAPIRequester";
+import TransferHistoryElement from "./components/TransferHistoryElement";
 
 export default function TradeHistory({
   params,
@@ -70,19 +71,40 @@ export default function TradeHistory({
     fillZeroes(); //call the async function from above
   }, [listFetched]);
 
+  //compute all pairs of trades and the current squad
+
+  let finalPairs: { [key: string]: [string, string] } = {}; //map to store the final pairs of trades and their corresponding squad, usage: player_id -> [buy_value, sell_value]
+  let currentSquad: { [key: string]: string } = {}; //map to store the current squad, usage: player_id -> buy_value
+  list.forEach((trade: any) => {
+    if (trade.tty === 2) {
+      //if trade is a sell, it has to be owned some time before
+      finalPairs[trade.pi] = [undefined, trade.trp];
+    }
+    if (trade.tty === 1 || trade.tty === 0) {
+      //if trade is a buy, we look if it has been sold already (so if the key already exists in the dict), if not, it has to be in the squad
+      if (finalPairs[trade.pi]) {
+        finalPairs[trade.pi][0] = trade.trp;
+      } else {
+        currentSquad[trade.pi] = trade.trp;
+      }
+    }
+  });
+
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="text-2xl">
         {/*history[0] because the first entry of the chained requests list will always exist and contains the name in unm param */}
         Trade History for {history ? history[0].unm : ""}
       </h2>
-      {list.map((trade: any) => {
-        //BUG: SWR IN getCompleteTradeHistoryList seems to be off (return of hook is undefined sometimes, prob because of getHistoryFetcherSWR function)
+      {Object.keys(finalPairs).map((key) => {
         return (
-          <div key={trade.id} className="flex gap-2">
-            <p>{trade.pn}</p>
-            <p>{trade.tty}</p>
-            <p>{trade.trp}</p>
+          <div key={key}>
+            <TransferHistoryElement
+              leagueId={params.leagueId}
+              playerId={key}
+              buyValue={finalPairs[key][0]}
+              sellValue={finalPairs[key][1]}
+            />
           </div>
         );
       })}
