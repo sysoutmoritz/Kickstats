@@ -98,19 +98,20 @@ export default function TradeHistory({
         {/*history[0] because the first entry of the chained requests list will always exist and contains the name in unm param */}
         Trade History for {history ? history[0].unm : ""}
       </h2>
-      {Array.from(finalPairs.keys()).map((key) => {
-        console.log("ABOUT TO MAKE TRADE HISTORY ELEMENT", key);
-        return (
-          <div key={key}>
+      <div className="flex flex-col gap-0.5 max-w-100%">
+        {Array.from(finalPairs.keys()).map((key) => {
+          console.log("ABOUT TO MAKE TRADE HISTORY ELEMENT", key);
+          return (
             <TransferHistoryElement
               leagueId={params.leagueId}
+              key={key}
               playerId={key}
               buyValue={finalPairs.get(key)[0]}
               sellValue={finalPairs.get(key)[1]}
             />
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
