@@ -13,3 +13,8 @@ Halbzeit: 4
 Fertig: 2 (angeblich)
 2. Hälfte: 8
 1. Hälfte: 1
+
+
+/leagues/{leagueID}/users/{userID}/feed?filter={f}&start={s}
+Filter numbers:
+22: Daily Login

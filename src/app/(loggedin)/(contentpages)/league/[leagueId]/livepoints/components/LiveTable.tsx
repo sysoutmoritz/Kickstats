@@ -10,15 +10,14 @@ import PlayerTableElement from "./PlayerTableElement";
 
 export default function LiveTable({
   leagueId,
-  clickedPlayer,
+  managerId,
+  setManagerId,
 }: {
   leagueId: string;
-  clickedPlayer: string;
+  managerId: string;
+  setManagerId: Function;
 }) {
-  const [userId, setUserId] = useLocalStorage("userId", "");
   const [token, setToken] = useLocalStorage("token", "");
-  const [userName, setUserName] = useLocalStorage("userName", "");
-  const [livePlayer, setLivePlayer] = useState(clickedPlayer); //Id of LivePlayer
   const {
     data: livePlayers,
     error,
@@ -33,18 +32,18 @@ export default function LiveTable({
   return (
     <>
       <ManagerDropdownMenu
-        setLivePlayerId={setLivePlayer}
-        livePlayerId={livePlayer}
+        setManagerId={setManagerId}
+        managerId={managerId}
         leagueId={leagueId}
       />
       <h2 className="text-2xl">
         Live Points for{" "}
-        {livePlayers.u.find((obj: any) => obj.id === livePlayer).n}
+        {livePlayers.u.find((obj: any) => obj.id === managerId).n}
       </h2>
       {/*get name of live player by the id and the liveData*/}
       <div className="flex flex-col gap-0.5 max-w-100%">
         {livePlayers.u // get "u" list, find the object with the id of the current user
-          .find((obj: any) => obj.id === livePlayer)
+          .find((obj: any) => obj.id === managerId)
           .pl.sort((a: any, b: any) => {
             //get the "pl" list from the found manager with all his players, sort it by the points
             if (Number(a.t) > Number(b.t)) return -1;
@@ -64,7 +63,7 @@ export default function LiveTable({
           <p className="px-18 mr-auto">Gesamt:</p>
           <p className="pr-[1.875rem] text-center">
             {/*get the total points of the live player*/}
-            {livePlayers.u.find((obj: any) => obj.id === livePlayer).t}
+            {livePlayers.u.find((obj: any) => obj.id === managerId).t}
           </p>
         </div>
       </div>

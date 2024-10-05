@@ -17,9 +17,7 @@ export default function UserTableElement({
     return (
       <button
         onClick={() => {
-          router.push(
-            `/league/${leagueId}/livepoints?clickedPlayerId=${user.id}`
-          );
+          router.push(`/league/${leagueId}/livepoints?manager=${user.id}`);
         }}
       >
         <div className="flex justify-between items-center gap-4 border border-gray-300 py-0.5 rounded-md max-w-100%">

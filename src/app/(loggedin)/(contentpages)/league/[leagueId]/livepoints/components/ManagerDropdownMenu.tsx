@@ -17,12 +17,12 @@ import useSWR from "swr";
 import { getFetcherSWR } from "../../../../../../../misc/KickbaseAPIRequester";
 
 export default function ManagerDropdownMenu({
-  setLivePlayerId,
-  livePlayerId,
+  setManagerId,
+  managerId,
   leagueId,
 }: {
-  setLivePlayerId: Function;
-  livePlayerId: string;
+  setManagerId: Function;
+  managerId: string;
   leagueId: string;
 }) {
   const [token, setToken] = useLocalStorage("token", ""); //token for api requests
@@ -57,13 +57,13 @@ export default function ManagerDropdownMenu({
               as="button"
               key={user.id}
               className={
-                user.id == livePlayerId
+                user.id == managerId
                   ? "border border-gray-600 bg-gray-400 dark:bg-slate-500 dark:text-gray-50 py-1 my-0.5"
                   : "border border-gray-600 bg-gray-100 dark:bg-slate-800 dark:text-gray-50 py-1 my-0.5"
               }
               onClick={() => {
-                if (user.id != livePlayerId) {
-                  setLivePlayerId(user.id);
+                if (user.id != managerId) {
+                  setManagerId(user.id);
                 }
               }}
             >
