@@ -83,8 +83,19 @@ export async function getHistoryFetcherSWR([url, token, offsetLength]:[string, s
             }
         } while (data.it.length === 25);
     }
-    return list;
+    let fullList = unrollHistoryList(list);
+    return fullList;
 }
+
+function unrollHistoryList(history: any) {
+    let historyList = history
+      .map((trade: any) => {
+        //map the full response only to the "it" (items) lists
+        return trade.it;
+      })
+      .flat(); //flatten all the lists into one big list
+    return historyList;
+  }
 
 export async function postFetcherSWR([url, token, body]:Array<any>) {
     if(token) {

@@ -15,7 +15,7 @@ export default function LoginLayout({
         <button
           className="bg-white border border-black rounded-lg m-2 dark:bg-slate-400 dark:text-gray-50 hover:scale-[1.02]"
           onClick={() => {
-            router.push("/dashboard");
+            router.back();
           }}
         >
           <Image
