@@ -49,7 +49,7 @@ export default function TransferHistoryElement({
           alt=""
         />
         {/* player name*/}
-        <div className="flex flex-col items-start overflow-hidden text-left max-w-15">
+        <div className="flex flex-col items-start text-left w-24 overflow-hidden">
           {playerData.knownName ? (
             <p className="text-md mt-3">
               {playerData.knownName ? playerData.knownName : ""}
@@ -66,18 +66,18 @@ export default function TransferHistoryElement({
           )}
         </div>
         {/* buy and sell price */}
-        <div className="flex flex-col items-end justify-center text-left shrink-0 ml-auto">
+        <div className="flex flex-col items-end justify-center text-left ml-auto">
           {/* buy price */}
           <div className="flex items-center justify-center">
-            <p className="text-xs">B:</p>
-            <p className="text-sm">
+            <p className="text-xs font-bold">B:&nbsp;</p>
+            <p className="text-xs">
               {new Intl.NumberFormat("de-DE").format(+buyValue)}€
             </p>
           </div>
           {/* sell price */}
           <div className="flex items-center justify-center">
-            <p className="text-xs">S:</p>
-            <p className="text-sm">
+            <p className="text-xs font-bold">S:&nbsp;</p>
+            <p className="text-xs">
               {new Intl.NumberFormat("de-DE").format(+sellValue)}€
             </p>
           </div>

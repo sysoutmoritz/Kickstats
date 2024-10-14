@@ -60,7 +60,7 @@ export default function LiveTable({
               );
           })}
         <div className="flex justify-end items-center text-xl py-1">
-          <p className="px-18 mr-auto">Gesamt:</p>
+          <p className="px-18 mr-auto">Total:</p>
           <p className="pr-[1.875rem] text-center">
             {/*get the total points of the live player*/}
             {livePlayers.u.find((obj: any) => obj.id === managerId).t}

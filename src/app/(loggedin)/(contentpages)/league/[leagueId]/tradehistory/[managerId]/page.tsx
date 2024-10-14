@@ -107,7 +107,7 @@ export default function TradeHistory({
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h2 className="text-2xl">
+      <h2 className="text-2xl pb-4">
         {/*history[0] because the first entry of the chained requests list will always exist and contains the name in unm param */}
         Trade History for {managerData ? managerData.unm : ""}
       </h2>
