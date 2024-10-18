@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 export function isTokenValid() {
   const tokenExp = localStorage.getItem("tokenExp");
-  if (!tokenExp || Date.now() > Date.parse(tokenExp)) {
+  if (!tokenExp || tokenExp == "" || Date.now() > Date.parse(tokenExp)) {
     return false;
   } else {
     return true;
