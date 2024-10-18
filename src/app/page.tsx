@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import useLocalStorage from "use-local-storage";
 
 export default function Home() {
   const router = useRouter();
-  let tokenExp: string | null;
+  const [tokenExp, setTokenExp] = useLocalStorage("tokenExp", ""); //get token from local storage
   useEffect(() => {
-    tokenExp = localStorage.getItem("tokenExp");
     if (
       !tokenExp ||
       tokenExp == "" ||
