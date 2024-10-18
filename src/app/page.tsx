@@ -8,7 +8,11 @@ export default function Home() {
   let tokenExp: string | null;
   useEffect(() => {
     tokenExp = localStorage.getItem("tokenExp");
-    if (!tokenExp || Date.now() > Date.parse(JSON.parse(tokenExp))) {
+    if (
+      !tokenExp ||
+      tokenExp == "" ||
+      Date.now() > Date.parse(JSON.parse(tokenExp))
+    ) {
       router.push("/login");
     } else {
       router.push("/dashboard");
