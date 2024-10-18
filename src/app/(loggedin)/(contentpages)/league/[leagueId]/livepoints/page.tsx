@@ -50,6 +50,7 @@ export default function LivePoints({
       >
         Trade History
       </button>
+      {/* 
       <button
         className="border border-gray-800 rounded-md p-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-50"
         onClick={() => {
@@ -58,6 +59,7 @@ export default function LivePoints({
       >
         League Top Stats
       </button>
+      */}
     </div>
   );
 }

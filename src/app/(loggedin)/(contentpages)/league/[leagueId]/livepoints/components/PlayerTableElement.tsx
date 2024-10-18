@@ -183,7 +183,7 @@ function playerStatusLogic(
     }
   }
   if (matchInfo.s == 2) {
-    return <p className="text-yellow-100">MATCH OVER</p>;
+    return <p className="dark:text-yellow-100 text-yellow-700">MATCH OVER</p>;
   }
   if (
     matchInfo.t1l != undefined &&
@@ -191,15 +191,17 @@ function playerStatusLogic(
     !(matchInfo.t1l.includes(playerId) || matchInfo.t2l.includes(playerId))
   ) {
     //lineup present and player not in lineup
-    return <p className="text-yellow-100">NOT IN SQUAD</p>;
+    return <p className="dark:text-yellow-100 text-yellow-700">NOT IN SQUAD</p>;
   }
   if (matchInfo.s == 1 || matchInfo.s == 8) {
     return <p className="text-red-600 font-bold">LIVE</p>;
   }
   if (matchInfo.s == 4) {
-    return <p className="text-blue-100">HALFTIME</p>;
+    return <p className="dark:text-blue-100 text-blue-600">HALFTIME</p>;
   }
   if (matchInfo.s == 0) {
-    return <p className="text-yellow-100">MATCH IN FUTURE</p>;
+    return (
+      <p className="dark:text-yellow-100 text-yellow-700">MATCH IN FUTURE</p>
+    );
   }
 }

@@ -24,6 +24,18 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
+      <footer className="bg-gray-50 dark:bg-slate-800 text-black dark:text-gray-50 box-border pt-4 px-2 text-center">
+        <hr className="border border-slate-800 dark:border-gray-50"></hr>
+        <u>
+          <a
+            className="text-sm"
+            href="https://github.com/sysoutmoritz/Kickstats"
+            target="_blank"
+          >
+            Github
+          </a>
+        </u>
+      </footer>
     </html>
   );
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function LoginHeader() {
   return (
     <>
-      <header className="flex items-center justify-center w-100% h-32 bg-gray-600 dark:bg-gray-700 p-2">
+      <header className="flex items-center justify-center w-100% h-32 bg-gray-400 dark:bg-gray-700 p-2">
         <div className="mr-auto">
           <ThemeSwitch />
         </div>
