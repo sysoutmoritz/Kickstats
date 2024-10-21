@@ -22,7 +22,7 @@ export default function LiveTable({
     data: livePlayers,
     error,
     isLoading,
-  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR);
+  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR, {refreshInterval: 3000});
   if (error) {
     return <div>Error: {error}</div>;
   }

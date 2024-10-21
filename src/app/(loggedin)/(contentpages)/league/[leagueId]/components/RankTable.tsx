@@ -15,7 +15,7 @@ export default function RankTable({
     data: liveData,
     error,
     isLoading,
-  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR); //fetch live data from api
+  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR, {refreshInterval: 3000}); //fetch live data from api
   if (error) {
     //if there is an error, display it
     return <div>Error fetching Live Data {error.message}</div>;
