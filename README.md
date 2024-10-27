@@ -6,7 +6,7 @@ View information and statistics for all your <a href="https://www.kickbase.com/"
 </div>
 
 > [!NOTE]
-This is a small side project of mine to try out the <a href="https://nextjs.org/">NextJS</a> framework and explore its capabilities. The project is far away from being finished but since I maintain it in my free time, the website might seem unpolished here and there and new features might take their time before being implemented. Any issues or PRs that improve or extend the code are welcome.
+This is a small side project of mine to try out the <a href="https://nextjs.org/">NextJS</a> framework and explore its capabilities. The project is far away from being finished and since I maintain it in my free time, the website might seem unpolished here and there and new features might take their time before being implemented. Any issues or PRs that improve or extend the code are welcome.
 
 
 # Table of Contents
