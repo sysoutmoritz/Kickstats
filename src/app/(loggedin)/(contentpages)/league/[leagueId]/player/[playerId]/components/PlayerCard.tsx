@@ -33,17 +33,29 @@ export default function PlayerCard({
     [`/leagues/${leagueId}/players/${playerId}`, token],
     getFetcherSWR
   );
-
   const {
     data: leagueStats,
     error: leagueStatsError,
     isLoading: leagueStatsIsLoading,
   } = useSWR([`/leagues/${leagueId}/stats`, token], getFetcherSWR);
+  const {
+    data: marketValue,
+    error: marketValueError,
+    isLoading: marketValueIsLoading,
+  } = useSWR(
+    [`/v4/leagues/${leagueId}/players/${playerId}/marketValue/365`, token],
+    getFetcherSWR
+  );
 
-  if (statsError || playerError || leagueStatsError) {
+  if (statsError || playerError || leagueStatsError || marketValueError) {
     return <div>Error Getting the data</div>;
   }
-  if (statsIsLoading || playerIsLoading || leagueStatsIsLoading) {
+  if (
+    statsIsLoading ||
+    playerIsLoading ||
+    leagueStatsIsLoading ||
+    marketValueIsLoading
+  ) {
     return <div>Loading...Player and PlayerStats</div>;
   }
   return (
@@ -204,7 +216,12 @@ export default function PlayerCard({
           {/* div for market value + trend */}
           <div className="flex justify-center items-center gap-0.5">
             {/* market value */}
-            <p>{new Intl.NumberFormat("de-DE").format(stats.marketValue)}€</p>
+            <p>
+              {new Intl.NumberFormat("de-DE").format(
+                marketValue.it[marketValue.it.length - 1].mv
+              )}
+              €
+            </p>
             {/* market value trend */}
             <Image
               className={
@@ -228,21 +245,21 @@ export default function PlayerCard({
             {/* market value change since yesterday */}
             <span
               className={
-                stats.marketValue -
-                  stats.marketValues[stats.marketValues.length - 2].m <
+                marketValue.it[marketValue.it.length - 1].mv -
+                  marketValue.it[marketValue.it.length - 2].mv <
                 0
                   ? "text-red-600 text-base"
                   : "text-green-600 text-base"
               }
             >
-              {stats.marketValue -
-                stats.marketValues[stats.marketValues.length - 2].m <
+              {marketValue.it[marketValue.it.length - 1].mv -
+                marketValue.it[marketValue.it.length - 2].mv <
               0
                 ? ""
                 : "+"}
               {new Intl.NumberFormat("de-DE").format(
-                stats.marketValue -
-                  stats.marketValues[stats.marketValues.length - 2].m
+                marketValue.it[marketValue.it.length - 1].mv -
+                  marketValue.it[marketValue.it.length - 2].mv
               )}
               €
             </span>

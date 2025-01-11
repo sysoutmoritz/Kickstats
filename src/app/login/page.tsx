@@ -17,27 +17,25 @@ async function doLoginCall(
   setUserProfile: Function,
   setLeagues: Function
 ) {
-  const response = await fetch("https://api.kickbase.com/user/login", {
+  const response = await fetch("https://api.kickbase.com/v4/user/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
     body: JSON.stringify({
-      email: email,
-      password: password,
-      ext: false,
+      em: email,
+      pass: password,
     }),
   });
   if (response.status === 200) {
     const json = await response.json();
-    console.log(json);
-    setToken(json.token);
-    setTokenExp(json.tokenExp);
-    setUserId(json.user.id);
-    setUserName(json.user.name);
-    setUserProfile(json.user.profile);
-    setLeagues(json.leagues);
+    setToken(json.tkn);
+    setTokenExp(json.tknex);
+    setUserId(json.u.id);
+    setUserName(json.u.name);
+    setUserProfile(json.u.profile);
+    setLeagues(json.srvl);
     router.push("/dashboard");
   } else {
     console.log("Login failed");
