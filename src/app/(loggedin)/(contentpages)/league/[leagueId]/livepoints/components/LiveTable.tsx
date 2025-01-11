@@ -22,7 +22,7 @@ export default function LiveTable({
     data: livePlayers,
     error,
     isLoading,
-  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR, {refreshInterval: 3000});
+  } = useSWR([`/v4/leagues/${leagueId}/teamcenter/myeleven`, token], getFetcherSWR, {refreshInterval: 3000});
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -38,11 +38,11 @@ export default function LiveTable({
       />
       <h2 className="text-2xl">
         Live Points for{" "}
-        {livePlayers.u.find((obj: any) => obj.id === managerId).n}
+        {livePlayers.lp.find((obj: any) => obj.id === managerId).n}
       </h2>
       {/*get name of live player by the id and the liveData*/}
       <div className="flex flex-col gap-0.5 max-w-100%">
-        {livePlayers.u // get "u" list, find the object with the id of the current user
+        {livePlayers.lp // get "u" list, find the object with the id of the current user
           .find((obj: any) => obj.id === managerId)
           .pl.sort((a: any, b: any) => {
             //get the "pl" list from the found manager with all his players, sort it by the points

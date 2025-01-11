@@ -15,7 +15,7 @@ export default function RankTable({
     data: liveData,
     error,
     isLoading,
-  } = useSWR([`/leagues/${leagueId}/live`, token], getFetcherSWR, {refreshInterval: 3000}); //fetch live data from api
+  } = useSWR([`/v4/leagues/${leagueId}/ranking`, token], getFetcherSWR, {refreshInterval: 3000}); //fetch live data from api
   if (error) {
     //if there is an error, display it
     return <div>Error fetching Live Data {error.message}</div>;
@@ -26,12 +26,12 @@ export default function RankTable({
   }
   return (
     <div className="flex flex-col gap-0.5 max-w-100%">
-      {liveData.u
+      {liveData.us
         .sort((a: any, b: any) => {
           if (
             //if we are on the matchday tab, sort by matchday points, otherwise by season points
-            Number(matchdayOrSeason == "left" ? a.t : a.st) >
-            Number(matchdayOrSeason == "left" ? b.t : b.st)
+            Number(matchdayOrSeason == "left" ? a.mdp : a.sp) >
+            Number(matchdayOrSeason == "left" ? b.mdp : b.sp)
           )
             return -1;
         })
@@ -39,7 +39,7 @@ export default function RankTable({
           //map all the users to one UserTableElement each
           return (
             <UserTableElement
-              key={user.id}
+              key={user.i}
               matchdayOrSeason={matchdayOrSeason}
               user={user}
               leagueId={leagueId}

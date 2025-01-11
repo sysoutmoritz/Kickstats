@@ -1,5 +1,5 @@
 const baseURL = "https://api.kickbase.com"
-
+const cdnUrl = "https://cdn.kickbase.com"
 
 export async function getRequest(url: string, token: string) {
     if(token) {
@@ -114,6 +114,22 @@ export async function postFetcherSWR([url, token, body]:Array<any>) {
         } else {
             window.alert("Request failed, please return to frontpage");
         }
+    }
 }
 
+export async function cdnFetcherSWR(path: string){
+    const response:any = await fetch(cdnUrl + path, {
+        method: "GET",
+        headers: {
+        "Accept-Encoding": "gzip"
+    }});
+    console.log("test")
+    console.log(response)
+    if(response.status === 302){
+        return response.location
+    }else{
+        return "/nopicture.webp"
+    }
 }
+
+
