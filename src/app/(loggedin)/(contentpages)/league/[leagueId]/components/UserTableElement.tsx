@@ -1,5 +1,8 @@
+import { cdnFetcherSWR } from "@/misc/KickbaseAPIRequester";
+import useSWR from "swr";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Avatar } from "./Avatar";
 
 //Component to render one manager in the manager rank table
 export default function UserTableElement({
@@ -21,15 +24,9 @@ export default function UserTableElement({
         }}
       >
         <div className="flex justify-between items-center gap-4 border border-gray-300 py-0.5 rounded-md max-w-100%">
-          <Image
-            className="rounded-[50%] w-12 h-12"
-            src={typeof user.i !== "undefined" ? user.i : "/nopicture.webp"} //if the user has no picture, use a default one
-            width={48}
-            height={48}
-            alt=""
-          />
+          <Avatar userid={user.i}></Avatar>
           <p className="">{user.n}</p>
-          <p className="ml-auto pr-4">{user.t}</p>
+          <p className="ml-auto pr-4">{user.mdp}</p>
         </div>
       </button>
     );
@@ -37,15 +34,9 @@ export default function UserTableElement({
   return (
     //if we are on the season tab (or not in the matchday tab rather, regarding the logic), we return the Element without a button and use the season points with user.st like explained above
     <div className="flex justify-between items-center gap-4 border border-gray-300 py-0.5 rounded-md max-w-100%">
-      <Image
-        className="rounded-[50%] w-12 h-12"
-        src={typeof user.i !== "undefined" ? user.i : "/nopicture.webp"}
-        width={48}
-        height={48}
-        alt=""
-      />
+      <Avatar userid={user.i}></Avatar>
       <p className="">{user.n}</p>
-      <p className="ml-auto pr-4">{user.st}</p>
+      <p className="ml-auto pr-4">{user.sp}</p>
     </div>
   );
 }

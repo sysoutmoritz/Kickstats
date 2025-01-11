@@ -10,6 +10,11 @@ const nextConfig = {
             hostname: "kickbase.b-cdn.net",
             port: "",
             pathname: "/**",
+        },{
+            protocol: 'https',
+            hostname: "cdn.kickbase.com",
+            port: "",
+            pathname: "/**",
         }]
     },
 };
