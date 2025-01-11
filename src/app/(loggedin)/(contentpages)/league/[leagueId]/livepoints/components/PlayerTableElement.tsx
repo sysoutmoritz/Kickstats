@@ -4,6 +4,7 @@ import { getFetcherSWR } from "@/misc/KickbaseAPIRequester";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import PlayerImage from "./PlayerImage";
 
 export default function PlayerListElement({
   livePlayerData,
@@ -20,7 +21,7 @@ export default function PlayerListElement({
     error,
     isLoading,
   } = useSWR(
-    [`/leagues/${leagueId}/players/${livePlayerData.id}`, token],
+    [`/v4/leagues/${leagueId}/players/${livePlayerData.id}`, token],
     getFetcherSWR
   ); //fetch the player data (for profile picture, name, etc.)
   const {
@@ -39,34 +40,22 @@ export default function PlayerListElement({
   return (
     <button
       onClick={() => {
-        router.push(`/league/${leagueId}/player/${playerData.id}`);
+        router.push(`/league/${leagueId}/player/${playerData.i}`);
       }}
     >
       <div className="flex justify-between items-center gap-0.5 border border-gray-300 py-0.5 rounded-md max-w-100%">
         {/* player picture */}
-        <Image
-          className={playerData.profileBig ? "self-end" : "mx-3"}
-          src={
-            playerData.profileBig ? playerData.profileBig : "/nopicture.webp"
-          }
-          width={playerData.profileBig ? 72 : 48}
-          height={playerData.profileBig ? 72 : 48}
-          alt=""
-        />
+        <PlayerImage playerId={playerData.i} />
         {/* player name and status */}
         <div className="flex flex-col items-start overflow-auto text-left">
-          {playerData.knownName ? (
+          {playerData.nin ? (
             <p className="text-md mt-3">
-              {playerData.knownName ? playerData.knownName : ""}
+              {playerData.nin ? playerData.nin : ""}
             </p>
           ) : (
             <div>
-              <p className="text-xs">
-                {playerData.firstName ? playerData.firstName : ""}
-              </p>
-              <p className="text-md">
-                {playerData.lastName ? playerData.lastName : ""}
-              </p>
+              <p className="text-xs">{playerData.fn ? playerData.fn : ""}</p>
+              <p className="text-md">{playerData.ln ? playerData.ln : ""}</p>
             </div>
           )}
           <div className="text-xs">
@@ -76,12 +65,12 @@ export default function PlayerListElement({
         {/* player position and club*/}
         <div className="flex justify-center items-center shrink-0 ml-auto">
           <p className="text-lg p-1">
-            {playerData.position ? positionCalculator(playerData.position) : ""}
+            {playerData.pos ? positionCalculator(playerData.pos) : ""}
           </p>
           <Image
             src={
-              playerData.teamId
-                ? `/team_logos/${playerData.teamId}.svg`
+              playerData.tid
+                ? `/team_logos/${playerData.tid}.svg`
                 : "default.png"
             }
             width={48}
