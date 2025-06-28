@@ -1,7 +1,6 @@
-<div align="center">
 > [!CAUTION]
-  This project is discontinued for now due to changes in the Kickbase API. It might be updated again, but not in the near future. The website is currently not usable. 
-
+> This project is discontinued for now due to changes in the Kickbase API. It might be updated again, but not in the near future. The website is currently not usable.
+<div align="center">
 <h1>Kickstats</h1>
 View information and statistics for all your <a href="https://www.kickbase.com/">Kickbase</a> leagues without the need of a pro membership.
   
