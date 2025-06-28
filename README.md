@@ -1,4 +1,7 @@
 <div align="center">
+<div style="border-left: 4px solid red; padding: 10px;">
+  <strong>⚠️ Important</strong> This project is discontinued for now due to changes in the Kickbase API. It might be updated again, but not in the near future. The website is currently not usable. 
+</div>
 <h1>Kickstats</h1>
 View information and statistics for all your <a href="https://www.kickbase.com/">Kickbase</a> leagues without the need of a pro membership.
   
